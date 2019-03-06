@@ -1,5 +1,4 @@
 # 입사교육 목차
-<!-- TOC -->
 
 - [입사교육 목차](#입사교육-목차)
 - [1일차 Admin 교육](#1일차-admin-교육)
@@ -36,20 +35,19 @@
     - [로그인](#로그인)
     - [인쇄](#인쇄)
     - [톰캣 경로 설정](#톰캣-경로-설정)
-- [Data Flow(정리중)](#data-flow정리중)
 
-<!-- /TOC -->
 
----
 <br>
-
+<hr>
 
 # 1일차 Admin 교육
 ## 인사정보
   - 메일 지시사항을 통해 수행할 것
   - `인사정보 갱신`, 연차 등록, 경조사 등
+  
 <br>
----
+<hr>
+
 ## 메일 시스템
   - [사이트 바로가기](https://mail.e-hcg.com/member/login?t=1551681321)
   - 메일은 `3회 이상` 확인할 것
@@ -57,15 +55,19 @@
   - `To(받는 이)`, `CC(참조자)`를 구분할 것
   - 내부 공문은 `문어체`를 활용해 간결히 표현할 것
   - 신입 사원에 대한 자기소개도 메일로 이루어지니 잘 작성해서 발송할 것
+  
 <br>
----
+<hr>
+
 ## 급여
   - `매월 15일`에 `한달치` 지급
   - 급여계좌는 `하나은행`으로 통일
   - 퇴직금여
     - 확정기여형(DC) 퇴직연금제도(하나은행)
+    
 <br>
----
+<hr>
+
 ## 휴가
   - 연간 `15일(1 ~ 12월 기준)`
     - 주어진 15일을 소비 못하면 그대로 `소멸`
@@ -73,8 +75,10 @@
   - 휴가 사용시 Time Sheet에 기재
     - 메일 사이트 - 홈페이지 접속(hr.e-hcg.co.kr) 후 등록
   - 담당 PM 승인 후 Admin으로 통보
+  
 <br>
----
+<hr>
+
 ## 경비
   - 담당 : `박영숙 대리님`
   - 경비는 반드시 `법인카드`를 통해 사용할 것
@@ -129,22 +133,28 @@
   - 회사로고가 박힌 편지지, 대봉투 등도 비치되어 있음
 ### 기타경비
   - 위 항목에 포함되지 않는 경비건을 기재함
+  
 <br>
----
+<hr>
+
 ## 개인지급물품
   - 개인 관리 PC에 대한 지급/반납 시 `문서`로 관리
     - 외장하드는 별도 미지급
   - 사이트/사무실에서의 노트북 사용 시 잠금 장치 사용
   - 관리 책임은 사용자의 책임이며 책임 사유 발생시 `책임을 부담`함
   - PC 고장시 Admin에 문의, 업무에 지장이 없도록 교체되도록 조치할 것
+  
 <br>
----
+<hr>
+
 ## 이벤트
   - 1사분기(1월 13일은 창립기념일)는 창립기념 행사
     - 앞 혹은 뒤쪽 금요일에 전 직원이 모여 각 유닛별 비전 소개, 신입 인사, 회사 경영 상황에 대한 이해 등으로 직원 커뮤니케이션 실시
   - 분기별 이벤트가 존재함
+  
 <br>
----
+<hr>
+
 ## 기타 복리후생
   - 종합건강검진
     - `2년마다` 검진센터를 선정하여 시행
@@ -155,17 +165,18 @@
     - 입사 후 즉시 가입, Admin에서 일괄 처리
       - 가입 후 Admin에서 개별적으로 보험 내용 통보
       - `임직원만 보험에 적용`, 퇴사 당일부터 보험의 대상에서 제외
----
+  
 <br>
+<hr>
 
 # 2일차 개발환경 설정
 ## Oracle Database 11g 설치
 ### 진행방법
 - [Oracle 설치 Wiki](https://wikidocs.net/3900)
   - 패스워드 : `password`로 설정
-
+  
 <br>
----
+<hr>
 
 ## Toad for Oracle 설치
 ### 진행방법
@@ -177,7 +188,10 @@
     ```sql
     CREATE TABLESPACE TS_HUNELSTANDARD DATAFILE 'D:\oracle\oradata\orcl\HUNELSTANDARD.DBF' SIZE 100M AUTOEXTEND ON;
     ```
+  
     <br>
+    <hr>
+
   - Create User
     ```sql
     CREATE USER "HUNELSTANDARD"
@@ -185,12 +199,18 @@
     DEFAULT TABLESPACE TS_HUNELSTANDARD
     TEMPORARY TABLESPACE TEMP;
     ```
+
     <br>
+    <hr>
+
   - Grant User
     ```sql
     GRANT DBA TO HUNELSTANDARD;
     ```
+
     <br>
+    <hr>
+
   - IMPDP(CMD에서 입력)
     ```
     IMPDP {$USER}/{$PASSWORD} DUMPFILE={$HUNELSTANDARD}.DMP DIRECTORY=DATA_PUMP_DIR REMAP_SCHEMA={$USER_ASIS}:{$USER_TOBE`} REMAP_TABLESPACE={$TS_ASIS}:{$TS_TOBE};
@@ -198,6 +218,8 @@
     - `ASIS는 from`, `TOBE는 to`
 
     <br>
+    <hr>
+
   - 암복호화 Key Mapping
     ```sql
     CREATE DIRECTORY DIR_HUNELSTANDARD AS 'D:\oracle\product\11.2.0\dbhome_1\HCG_PKG_DIR\HUNELSTANDARD';
@@ -207,7 +229,10 @@
     - 회사 라이센스 아래에 위치하며 key.properties or license.dat 파일을 위한 디렉토리를 생성
     - 해당 위치에 key.properties 또는 license.dat 파일을 복사
 
+
     <br>
+    <hr>
+
   - DB 권한 부여
     ```sql
     GRANT EXECUTE ON DBMS_CRYPTO TO HUNELSTANDARD;
@@ -215,24 +240,36 @@
     EXEC dbms_java.grant_permission('HUNELSTANDARD', 'SYS:java.security.SecurityPermission', 'putProviderProperty.BC', '' );
     EXEC dbms_java.grant_permission('HUNELSTANDARD', 'SYS:java.security.SecurityPermission', 'insertProvider.BC', '' ); 
     ```
+
     <br>
+    <hr>
+
   - Java Class 등록(CMD에서 입력)
     ```
     dropjava -u HUNELSTANDARD/HUNEL!STANDARD@localhost:1521:ORCL -v -r -t *.*
     loadjava -u HUNELSTANDARD/HUNEL!STANDARD@localhost:1521:ORCL -v -r -t C:\EHR_PROJECT\HUNEL_EHRS_WEB_STAND\db\loadjava\*.*
     ```
+
     <br>
+    <hr>
+
   - DB Package Compile
     ```
     PKG_CRYPTO_CORE.PKS 우클릭 후 debug
     ```
-  <br>
+
+    <br>
+    <hr>
+
 - RET User
   - RET User Tablespace 생성
     ```sql
     CREATE TABLESPACE TS_HUNELHTMLEHR_RET DATAFILE 'D:\oracle\oradata\orcl\HUNELHTMLEHR_RET.DBF' SIZE 100M AUTOEXTEND ON;
     ```
+
     <br>
+    <hr>
+
   - Create User
     ```sql
     CREATE USER "HUNELHTMLEHR_RET"
@@ -240,17 +277,26 @@
     DEFAULT TABLESPACE TS_HUNELHTMLEHR_RET
     TEMPORARY TABLESPACE TEMP;
     ```
-      <br>
+
+    <br>
+    <hr>
+
   - Grant User
     ```sql
     GRANT DBA TO HUNELHTMLEHR_RET;
     ```
-      <br>
+
+    <br>
+    <hr>
+
   - IMPDP(CMD에서 입력)
     ```
     IMPDP {$USER}/{$PASSWORD} DUMPFILE={$HUNELHTMLEHR_RET}.DMP DIRECTORY=DATA_PUMP_DIR 
     ```
+
     <br>
+    <hr>
+
 - RET 권한 부여
   - RET User 생성 후 실행
     ```sql
@@ -261,7 +307,9 @@
     - Query 실행 후 나오는 입력 창에 `HUNELSTANDARD`과 `HUNELHTMLEHR_RET` `username` 입력
     - 실행 결과를 전체 선택하여 복사 + 붙여넣기 후 Query 실행
 
-  <br>
+    <br>
+    <hr>
+
 ### 오류
 - ORA-12541
   - 원인
@@ -288,7 +336,7 @@
   - [참조 사이트](https://wikidocs.net/3907)
 
 <br>
----
+<hr>
 
 # 3일차 기능 교육(1)
 ## Java 설정
@@ -353,8 +401,8 @@
     ```
 
 <br>
+<hr>
 
----
 ## 로그인
 - 관리자 계정 비밀번호 변경
   - 아이디 : SUPER / 비밀번호 : 임의의 값 입력 후 실패
@@ -367,7 +415,10 @@
       WHERE C_CD = '10'
           AND USER_ID = 'SUPER';
       ```
-      <br>
+
+    <br>
+    <hr>
+
     - DB에서 설정하는 방법
       ```sql
       UPDATE HUNELSTANDARD.SY4100 
@@ -383,8 +434,10 @@
         - [1번](/sql/login.sql)
         - [2번](/sql/login2.sql)
         - [3번](/sql/login3.sql)
-  
+
     <br>
+    <hr>
+
   - 계정 비밀번호 5회 이상 틀렸을 시
     ```sql
     UPDATE SY4100
