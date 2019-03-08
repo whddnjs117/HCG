@@ -361,7 +361,10 @@
     - [코드 내용](/xml/codeStyle/hunelJavaCodeStyle.xml)
   - window - preference - JavaScript - Code Style - Formatter - Import
     - [코드 내용](/xml/codeStyle/hunelJavaScriptCodeStyle.xml)
----
+
+<br>
+<hr>
+
 ### 프로젝트 설정
 - Project Import
   - Project Import - Existing Projects into Workspace -  `HUNEL_EHRS_WEB_STAND`
@@ -370,7 +373,10 @@
     - Tomcat - edit - Apache Tomcat 7.0
     - JRE System Library - edit - jdk1.7
     - 좌측 대분류에서 Project Factes - Java version 1.7
----
+
+<br>
+<hr>
+
 ### 톰캣 설정
 - server.xml
   - Tomcat 추가 완료시 Explorer에 `Servers` 폴더가 표시
@@ -585,3 +591,11 @@
     - Crownix : 출력물 관리 툴
 - SelectList는 자체 라이프 사이클을 가지므로 한개일때는 괜찮으나 여러개일 경우 성능저하의 문제가 있다.
 - combo.jsp와 xsheetResultXML.jsp는 otp 적용이 되지 않아 해킹의 위협이 있다.
+
+<br>
+<hr>
+
+# 4일차 기능교육(2)
+- Profile : 권한 그룹
+  - EIS : 임원
+  - ESS : 일반 사용자
