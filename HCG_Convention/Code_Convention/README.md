@@ -1,3 +1,49 @@
+# 목차 
+
+- [목차](#%EB%AA%A9%EC%B0%A8)
+- [HCG Code Convention](#hcg-code-convention)
+  - [Basic Rule](#basic-rule)
+    - [Space](#space)
+    - [Upper&Lower](#upperlower)
+    - [Tag Attribute Value](#tag-attribute-value)
+    - [Code](#code)
+  - [Comment](#comment)
+    - [Variable Comment](#variable-comment)
+    - [Code Comment](#code-comment)
+    - [JSP Comment](#jsp-comment)
+    - [Java Comment](#java-comment)
+    - [Java Method Comment](#java-method-comment)
+    - [DB Procedure, Function Comment](#db-procedure-function-comment)
+  - [Module Naming Rule](#module-naming-rule)
+    - [조직관리(Organization Management, **`orm`**)](#%EC%A1%B0%EC%A7%81%EA%B4%80%EB%A6%ACorganization-management-orm)
+    - [직무역량(Job & Competency Management, **`jcm`**)](#%EC%A7%81%EB%AC%B4%EC%97%AD%EB%9F%89job--competency-management-jcm)
+    - [인사운영(Personnal Administration & Staffing, **`pas`**)](#%EC%9D%B8%EC%82%AC%EC%9A%B4%EC%98%81personnal-administration--staffing-pas)
+    - [근태(Time & Absence Management, **`tam`**)](#%EA%B7%BC%ED%83%9Ctime--absence-management-tam)
+    - [급여(Payroll & Compensation Management, **`pcm`**)](#%EA%B8%89%EC%97%ACpayroll--compensation-management-pcm)
+    - [소득정산(Adjustment, **`adj`**)](#%EC%86%8C%EB%93%9D%EC%A0%95%EC%82%B0adjustment-adj)
+    - [복리후생(Benefit & Social Insurance, **`bsi`**)](#%EB%B3%B5%EB%A6%AC%ED%9B%84%EC%83%9Dbenefit--social-insurance-bsi)
+    - [채용(Job Based Recruiting Management, **`rem`**)](#%EC%B1%84%EC%9A%A9job-based-recruiting-management-rem)
+    - [총무(General Management, **`gen`**)](#%EC%B4%9D%EB%AC%B4general-management-gen)
+    - [평가관리(Performance Evaluation & Management, **`pem`**)](#%ED%8F%89%EA%B0%80%EA%B4%80%EB%A6%ACperformance-evaluation--management-pem)
+    - [보상관리(Compensation Management, **`cm`**)](#%EB%B3%B4%EC%83%81%EA%B4%80%EB%A6%ACcompensation-management-cm)
+    - [경력개발(Career Development Planning, **`cdp`**)](#%EA%B2%BD%EB%A0%A5%EA%B0%9C%EB%B0%9Ccareer-development-planning-cdp)
+    - [교육연수(Training & Event Management, **`temp`**)](#%EA%B5%90%EC%9C%A1%EC%97%B0%EC%88%98training--event-management-temp)
+    - [시스템(System Administration, **`sys`**)](#%EC%8B%9C%EC%8A%A4%ED%85%9Csystem-administration-sys)
+  - [Directory Structure](#directory-structure)
+  - [Program Naming](#program-naming)
+    - [Variable](#variable)
+    - [Method](#method)
+    - [프로그램 ID Rule](#%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8-id-rule)
+    - [업무JSP 파일명](#%EC%97%85%EB%AC%B4jsp-%ED%8C%8C%EC%9D%BC%EB%AA%85)
+    - [Report 파일명](#report-%ED%8C%8C%EC%9D%BC%EB%AA%85)
+    - [HTML 파일명](#html-%ED%8C%8C%EC%9D%BC%EB%AA%85)
+    - [Java 파일명(DAO)](#java-%ED%8C%8C%EC%9D%BC%EB%AA%85dao)
+    - [XML 파일명(쿼리)](#xml-%ED%8C%8C%EC%9D%BC%EB%AA%85%EC%BF%BC%EB%A6%AC)
+  - [Common Source Explain](#common-source-explain)
+    - [CSS](#css)
+    - [JS](#js)
+    - [JSP](#jsp)
+
 # HCG Code Convention
 ## Basic Rule
 ### Space
@@ -324,6 +370,14 @@ vect = remote.selectCodeList2(table_id, col_cd, col_nm, syntax, size);
 <br>
 
 ## Program Naming
+### [Variable](elaborate/variable.md)
+
+<br>
+
+### [Method](elaborate/method.md)
+
+<br>
+
 ### 프로그램 ID Rule
 - 서브모듈_XXX(Serial NO) (ex) pa_stat_350_sl01
 - Serial No : 서브모듈 아래 시퀀셜하게 붙는 번호로 000 ~ 999 범위에 속하며, 대체적으로 10에서 시작해서 10씩 증가한다.
