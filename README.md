@@ -599,3 +599,8 @@
 - Profile : 권한 그룹
   - EIS : 임원
   - ESS : 일반 사용자
+
+# 5일차 기능교육(3)
+
+# 과제
+- [`document.ready(function(){});` 을 분석하시오.](/work/presentation.md)

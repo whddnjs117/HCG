@@ -8,6 +8,7 @@
   - main.js
   - hunel.js
 
+## 시작 메소드
 ```js
 $(document).ready(function () { // Native Jquery
 
@@ -252,7 +253,10 @@ $(document).ready(function () { // Native Jquery
     }
 
 });
+```
 
+## + 개발툴
+```js
 // HUNEL_DEV_TOOL_USE_YN
 // 개발자 도구를 사용하기 위한 체크 변수
 // 개발자 도구에서 파일 업로드를 위하여 개발자모드 일때만 일시적으로 체크하지 않음
@@ -278,6 +282,7 @@ var DevTool = {
 }
 ```
 
+## applyElementFormat() 메소드
 ```js
 function applyElementFormat()
 {
@@ -455,8 +460,7 @@ function applyElementFormat()
 }
 ```
 
-
-
+## applyElementSearchEmp() 메소드
 ```js
 /**
  * 사번/성명 조회조건의 기능들을 정의한다
@@ -844,8 +848,7 @@ function applyElementSearchEmp()
 }
 ```
 
-
-
+## applyElementSearchOrg() 메소드
 ```js
 /**
  * 조직명 조회조건의 기능들을 정의한다
@@ -1112,6 +1115,7 @@ function applyElementSearchOrg()
 }
 ```
 
+## setButtonAuth() 메소드
 ```js
 /**
  * 버튼,파일,input박스의 class 적용 및 버튼 권한 적용
@@ -1166,6 +1170,7 @@ function setButtonAuth()
 }
 ```
 
+## setNotice() 메소드
 ```js
 /**
  * 「도움말관리」 프로그램에서 등록된 도움말이 있으면 화면의 도움말 버튼을 그려준다.
@@ -1251,6 +1256,7 @@ function setNotice()
 }
 ```
 
+## applyElementSessionCon() 메소드
 ```js
 function applyElementSessionCon()
 {
