@@ -603,8 +603,8 @@
 # 5일차 기능교육(3)
 
 # 1주차 과제
-- [`document.ready(function(){});` 을 분석하시오.](/work/presentation.md)
-- Oracle SQL문을 작성하시오.
+- [`document.ready(function(){});` 을 분석하시오.](/work/js/firstAnalytics.md)
+- [Oracle SQL문을 작성하시오.](/work/sql/fristQuery.md)
 
 <br>
 <br>
@@ -624,3 +624,8 @@
     - 현재 기업에서 가장 많이 활성화한 근무제는 유연근무제와 선택근무제임
     - 40시간을 초과하는 일에 대해서는 일정수당은 보상해야함
       - 휴일근무, 추가근무수당, 야간근무수당
+
+# 2주차 과제
+- JavaScript 메소드 분석
+  - inputSetValueAuto
+  - inputAutoUnformat

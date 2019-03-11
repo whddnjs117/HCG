@@ -1,6 +1,6 @@
-# 목차
+# 1주차 분석과제 목차
 
-- [목차](#%EB%AA%A9%EC%B0%A8)
+- [1주차 분석과제 목차](#1%EC%A3%BC%EC%B0%A8-%EB%B6%84%EC%84%9D%EA%B3%BC%EC%A0%9C-%EB%AA%A9%EC%B0%A8)
 - [document.ready(function(){...}); 분석](#documentreadyfunction-%EB%B6%84%EC%84%9D)
   - [시작 메소드](#%EC%8B%9C%EC%9E%91-%EB%A9%94%EC%86%8C%EB%93%9C)
   - [+ LoadPage, Layout 부분](#loadpage-layout-%EB%B6%80%EB%B6%84)
