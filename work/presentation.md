@@ -1,11 +1,10 @@
 # 목차
 
-<!-- TOC -->
-
 - [목차](#%EB%AA%A9%EC%B0%A8)
 - [document.ready(function(){...}); 분석](#documentreadyfunction-%EB%B6%84%EC%84%9D)
   - [시작 메소드](#%EC%8B%9C%EC%9E%91-%EB%A9%94%EC%86%8C%EB%93%9C)
-  - [+ 개발툴](#%EA%B0%9C%EB%B0%9C%ED%88%B4)
+  - [+ LoadPage, Layout 부분](#loadpage-layout-%EB%B6%80%EB%B6%84)
+  - [+ DevTool 부분](#devtool-%EB%B6%80%EB%B6%84)
   - [applyElementFormat() 메소드](#applyelementformat-%EB%A9%94%EC%86%8C%EB%93%9C)
   - [applyElementSearchEmp() 메소드](#applyelementsearchemp-%EB%A9%94%EC%86%8C%EB%93%9C)
   - [applyElementSearchOrg() 메소드](#applyelementsearchorg-%EB%A9%94%EC%86%8C%EB%93%9C)
@@ -13,30 +12,27 @@
   - [setNotice() 메소드](#setnotice-%EB%A9%94%EC%86%8C%EB%93%9C)
   - [applyElementSessionCon() 메소드](#applyelementsessioncon-%EB%A9%94%EC%86%8C%EB%93%9C)
 
-<!-- /TOC -->
-
 # document.ready(function(){...}); 분석
-- 확인한 파일들
-  - pa120_ul01.jsp
-  - commonResource.jsp
-  - product_info.html
-  - ibsheetinfo.js, FormQueryString(form, checkRequired, jsonObj)
-  - ibsheet.js
-  - main.js
-  - hunel.js
+- 확인 파일
+  - [commonResource.jsp](/js/commonResource.jsp)
+  - [product_info.html](/html/product_info.html)
+  - [ibsheetinfo.js](/js/ibsheetinfo.js)
+    - FormQueryString(form, checkRequired, jsonObj);
+  - [ibsheet.js](/js/ibsheet.js)
+  - [main.js](/js/main.js)
+  - [hunel.js](/js/hunel.js)
+  - [common.js](/common.js)
 
 ## 시작 메소드
 ```js
 $(document).ready(function () { // Native Jquery
 
     //chkAuthMenu 권한체크를 위해 추가함
-    if(window.Page != null)
+    if(window.Page != null) // Page는 전역변수같은 것임.
     {
         form = ($("#f1").length > 0)? $("#f1") : $("form").first();
-        // #f1은 정보를 가지는 영역으로 hidden 상태임
-        // #f1의 길이(정보)가 담겨있다면 form의 명칭은 #f1
-        // form 태그의 가장 첫번째를 form 으로 지정한다.
-
+        // Jquery 셀렉터로 무언가를 찾으면 해당하는 Element들의 배열을 리턴한다.
+        // length는 길이가 아니라 속성의 개수임.
         form.append('<input type="hidden" id="S_PAGE_PROFILE_ID" name="S_PAGE_PROFILE_ID" value="'+Page.PROFILE_ID+'">');
         form.append('<input type="hidden" id="S_PAGE_MODULE_ID" name="S_PAGE_MODULE_ID" value="'+Page.MODULE_ID+'">');
         form.append('<input type="hidden" id="S_PAGE_MENU_ID" name="S_PAGE_MENU_ID" value="'+Page.MENU_ID+'">');
@@ -48,39 +44,14 @@ $(document).ready(function () { // Native Jquery
 
         form.append('<input type="hidden" id="__viewState" name="__viewState" value="">');
         // ibsheetinfo.js - FormQueryString(form, checkRequired, jsonObj)의 return 값이 plain_text로 QueryString이다.
-        // 즉 #f1의 정보를 쿼리스트링으로 조합하고 JsonObject화 시키는게 아닌지 추측해본다.
-
-        // AUTH_ADMIN_YN: "Y"
-        // BUTTON_LOG_YN: "Y"
-        // C_CD: "10"
-        // EMP_SCH_AUTH_CD: "10"
-        // EMP_TYPE: "10"
-        // ENC_VAL: ""
-        // ENC_VAL2: ""
-        // GEN_YN: ""
-        // HELP_MSG: ""
-        // HELP_PGM_ID: ""
-        // LANG: "ko"
-        // MENU_ID: ""
-        // MODULE_ID: ""
-        // NTNL_CD: "KOR"
-        // PGM_BTN_LOG_YN: "null"
-        // PGM_ID: "hunel"
-        // PGM_URL: "/main/jsp/hunel.jsp"
-        // POP_URL: "/main/jsp/hunel.jsp"
-        // PROFILE_ID: ""
-        // PRS_ID: ""
-        // SKIN_PATH: "/resource"
-        // SQL_ID: ""
+        // 즉 form의 정보를 쿼리스트링으로 조합하고 JsonObject로 변환한다.
 
         if(typeof(Page) != "undefined" &&  ! Page.MENU_ID) displayElement($(".btMsg"), false);
         // Page 객체의 타입을 체크하고
         // hunel.js의 LeftMenu의 makeItem 함수에 $item 객체를 파라미터로 주면 MENU_ID는 nvl함수로 정의할 수 있다.
-        // displayElement는 btMsg 클래스를 숨긴다.
-        // displayElemeent, .btsMsg 는 Native Jquery이다.
 
         applyElementFormat();
-        // 시간, 달력을 지정된 포맷으로 변환하여 세션에 정리, IE가 아니라면 건너뛴다.
+        // 시간, 달력을 지정된 포맷으로 변환하여 세션에 정리
         
         applyElementSearchEmp();
         // 사번/성명 조회기능 조건에 대해 정의
@@ -96,7 +67,24 @@ $(document).ready(function () { // Native Jquery
 
         DevTool.init();
     }
+```
 
+## + LoadPage, Layout 부분
+```js
+    /*
+    * 페이지별 옵션을 주기 위해서는 body tag 에 layoutAuto 속성을 false 로 설정하고
+    * LoadPage() 상단에 Layout.init 속성 설정 한다.
+    * Default 로 Layout.init() 설정을 하기 위함.
+    */
+
+    // Double Exclamation Marks : 느낌표 두개(!!) 연산자는 확실한 논리결과를 가지기 위해 사용
+    // <body layoutAuto="false">
+    if(!!$("body").attr2("layoutAuto")) {} else { Layout.init();}
+    // Layout.init({slidersize:2, color:"#d7262e", solidslider:true}); //slidersize는 두께
+    // 이거 안하면 잠금해제 상태에서 새로고침 후 돌아올 때 사이즈 조절 안되서 화면 안보인다.
+    if(!!$("body").attr2("layoutAuto")) {} else { setTimeout(function(){Layout.resize();}, 500);}
+    // 시간 지연함수 setTimeout으로 Layout.resize()를 0.5 초후에 실행한다.
+    // resize 이벤트는 스크립트로 제어했을 때 사이즈가 변경되면 사용한다.
 
     /**
      * jquery attr의 결과가 undefined이면 "" 아니면 결과를 리턴
@@ -113,22 +101,6 @@ $(document).ready(function () { // Native Jquery
     //     }
     //     return ($tmp == undefined)? "" : $tmp;
     // },
-
-
-    /*
-    * 페이지별 옵션을 주기 위해서는 body tag 에 layoutAuto 속성을 false 로 설정하고
-    * LoadPage() 상단에 Layout.init 속성 설정 한다.
-    * Default 로 Layout.init() 설정을 하기 위함.
-    */
-
-    // Double Exclamation Marks : 느낌표 두개(!!) 연산자는 확실한 논리결과를 가지기 위해 사용
-    // <body layoutAuto="false">
-    if(!!$("body").attr2("layoutAuto")) {} else { Layout.init();}
-    // Layout.init({slidersize:2, color:"#d7262e", solidslider:true}); //slidersize는 두께
-    // 이거 안하면 잠금해제 상태에서 새로고침 후 돌아올 때 사이즈 조절 안되서 화면 안보인다.
-    if(!!$("body").attr2("layoutAuto")) {} else { setTimeout(function(){Layout.resize();}, 500);}
-    // 시간 지연함수 setTimeout으로 Layout.resize()를 0.5 초후에 실행한다.
-    // resize 이벤트는 스크립트로 제어했을 때 사이즈가 변경되면 사용한다.
 
     // setTimeout() 함수 사용 시기
     // i. 접속 후 몇 초 후에 팝업 또는 배너창 띄우기
@@ -272,7 +244,7 @@ $(document).ready(function () { // Native Jquery
 });
 ```
 
-## + 개발툴
+## + DevTool 부분
 ```js
 // HUNEL_DEV_TOOL_USE_YN
 // 개발자 도구를 사용하기 위한 체크 변수

@@ -181,7 +181,7 @@
 ## Toad for Oracle 설치
 ### 진행방법
 - sysdba에 sys/password로 세션 로그인
-  - 탭 -> file open으로 [import.sql](/sql/impdp.sql) 불러오기
+  - 탭 -> file open으로 [import.sql](/configure/sql/impdp.sql) 불러오기
   - 아래 SQL문에서 {$이름} 적혀있는 곳은 상황에 맞게 반드시 수정
 - Main User
   - Main User TableSpace 생성
@@ -358,9 +358,9 @@
       - HCG는 TAB을 쓰지 않음
     - Highlight current line 
   - window - preference - Java - Code Style - Formatter - Import
-    - [코드 내용](/xml/codeStyle/hunelJavaCodeStyle.xml)
+    - [코드 내용](/configure/xml/codeStyle/hunelJavaCodeStyle.xml)
   - window - preference - JavaScript - Code Style - Formatter - Import
-    - [코드 내용](/xml/codeStyle/hunelJavaScriptCodeStyle.xml)
+    - [코드 내용](/configure/xml/codeStyle/hunelJavaScriptCodeStyle.xml)
 
 <br>
 <hr>
@@ -380,7 +380,7 @@
 ### 톰캣 설정
 - server.xml
   - Tomcat 추가 완료시 Explorer에 `Servers` 폴더가 표시
-  - 내부의 server.xml을 [server.xml](/xml/tomcat/server.xml)로 교체
+  - 내부의 server.xml을 [server.xml](/configure/xml/tomcat/server.xml)로 교체
   - 변경해야하는 부분
     - Default Users : username, password, url
       ```xml
@@ -437,9 +437,9 @@
       UPDATE REEHR.RE4010 SET PWD = PKG_CRYPTO.F_SET_ENC_SHA('1') WHERE MAIL = '1@e-hcg.com';
       ```
       - 관련 sql문
-        - [1번](/sql/login.sql)
-        - [2번](/sql/login2.sql)
-        - [3번](/sql/login3.sql)
+        - [1번](/configure/sql/login.sql)
+        - [2번](/configure/sql/login2.sql)
+        - [3번](/configure/sql/login3.sql)
 
     <br>
     <hr>
