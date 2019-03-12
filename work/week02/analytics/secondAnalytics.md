@@ -13,9 +13,14 @@ function inputSetValueAuto(input, str, data_format, default_value, deReplaceXssY
     // (typeof element == "string" && element != "") ?  $("#"+element) : $(element);
 
     if ( input.length == 0 ) alert("inputSetValueAuto: input("+input+","+orgInput+") is not defined...");
-    if ( default_value != null && (str == null || str == "")) str = default_value;
-    str = String(str);
+    // input 태그가 없다면 경고창을 띄운다.
 
+    if ( default_value != null && (str == null || str == "")) str = default_value;
+    // default_value에 값이 있고 str에 값이 없으면 str은 default_value로 대치한다.
+```
+    str = [String(str);]()
+```js
+    // String replaceAll()를 재정의했음.
     if(deReplaceXssYn=="Y")
     {
         str = deReplaceXss(str);
