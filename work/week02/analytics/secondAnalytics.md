@@ -41,14 +41,17 @@ function inputSetValueAuto(input, str, data_format, default_value, deReplaceXssY
         case "INPUT":
         {
             if ( array_indexOf(["radio"], input.attr2("type")  ) >=0 ){
+                // ["radio"] 유사 배열 객체 중 input.attr2("type") 에 해당하는 값이 있는가?
                 input.attr("checked", input.val() == str);
-                // 
+                // 존재한다면 input 객체의 checked 속성을 true로 변환한다.
             }else if ( array_indexOf(["checkbox"], input.attr2("type")  ) >=0 ){
+                // ["checkbox"] 유사 배열 객체 중 input.attr2("type") 에 해당하는 값이 있는가?
                 input.prop("checked", input.val() == str);
-                // 
+                // 존재한다면 input 객체의 checked 속성을 true로 변환한다.
             }else if ( input.attr2("data_format") ){
                 inputSetFormatValue(input, str, input.attr2("data_format"));
-                // 
+                // input 객체 중 data_format의 값이 true라면 input의 값을 변환하는 함수를 실행한다.
+
             }else{
                 input.val(str);
                 // input의 value를 str로 설정하고 종료한다.
@@ -96,9 +99,8 @@ function inputAutoUnformat(form, f, s)
     var s_name;
 
     $("#"+form.prop("id")+" input[id^='" + f_ + "']").each(function(index){
-        // 
+        // 최초 #+form.prop("id")의 자식 input 개체 중 F_로 시작되는 모든 개체를 반복하며 수행
         s_name = s_ + $(this).attr("id").substr(f_.length);
-
         if($("#" + s_name).length == 0){
             var tmpHidden = $("<input type='hidden' id='" + s_name + "' name='" + s_name + "' />");
             form.append(tmpHidden);
@@ -174,6 +176,7 @@ function array_indexOf(array, val)
 function inputSetFormatValue(input, str, data_format)
 {
   input = returnjQueryObj(input);
+  // input은 객체이므로 $(this)를 input 객체에 바인딩한다.
   input.val( formatValue(str, data_format || input.attr2("data_format")) );
 }
 ```
@@ -190,8 +193,9 @@ function inputSetFormatValue(input, str, data_format)
 function formatValue(str, data_format, point_count)
 {
   if(str == null) return "";
+  // 입력받은 str 파라미터가 null이면 공백을 리턴한다.
   if(typeof str == "number") str = str.toString();
-  
+  // 입력받은 str 파라미터가 number 깁존 타입이라면 str을 String으로 변환해 반환한다.
   var rv = "";
   switch ( data_format )
   {
@@ -210,29 +214,41 @@ function formatValue(str, data_format, point_count)
     case "dfPostNo":  rv = formatValueMask(str, "###-###"); break;
     case "dfCorpNo":  rv = formatValueMask(str, "######-#######"); break;
     case "dfIssueNo": rv = formatValueMask(str, "####-######"); break;
+    // case 라면, formatValueMask를 통해 숫자 문자열을 변환하여 저장하고 종료한다.
     case "dfNo":      rv = str.replace(/\D/g, ""); break;
+    // case 라면, 정규표현식 적용, "문자열 내의 모든 숫자를 제외한 문자"를 공백으로 치환하고 저장 후 종료한다.
     case "dfInteger+":rv = formatComma(str.replace(/\D/g, "")); break;
+    // 숫자 문자열에 , 를 붙인다.
     case "dfInteger1":rv = formatComma(str.replace(/\D/g, "")); break;
     case "dfInteger":
     {
       var sign = str.substr(0, 1) == "-" ? "-" : "";
+      // str의 처음 문자가 - 라면 - 그대로 적용하고, 아니면 제거한다.
       rv = sign + formatComma(str.replace(/\D/g, ""));
+      // rv는 sign값에 숫자 문자열에 , 를 붙여 반환한 값을 더하여 저장한다.
     }
     break;
     case "dfFloat+":
+    // 실수형 값 변환
     {
       var pointidx = str.indexOf(".");
+      // . 이 들어가는 인덱스의 값을 저장한다.
       var pointbelow = ( pointidx >= 0 ) ? "."+ str.substr(pointidx).replace(/\D/g, "") : "";
+      // .이 음수가 아니라면 . 에 str을 변환하여 추가하고, 아니라면 비어있는 값을 반환한다.
       var numvalue = formatComma(str.substr(0, pointidx >= 0 ? pointidx : str.length).replace(/\D/g, ""));
+      // 숫자 문자열에 , 를 더하는 함수를 수행한다.
       if ( point_count != null)
       {
         numvalue = numvalue == "" ? "0" : numvalue;
         pointbelow = rpad(pointbelow || ".", point_count+1, "0");
+        // 문자열(str)의 길이가 (size)가 되도록 왼쪽부터 (padc)문자식으로 채운 표현식을 반환
+        // (str)문자열을 (size)길이만큼 (padc)문자열로 (LR)좌우 패딩
       }
       rv = numvalue + pointbelow;
     }
     break;
     case "dfFloat":
+    // 실수형 값 변환
     {
       var sign = str.substr(0, 1) == "-" ? "-" : "";
       var pointidx = str.indexOf(".");
@@ -264,14 +280,24 @@ function formatValueMask(str, format)
 {
   var rv = "";
   var numcount = countChr(format, '#');
+  // # 의 갯수를 카운트하여 반환
+
   str = str.replace(/\D/g, "").substr(0, numcount);
+  // 정규표현식 적용, "문자열 내의 모든 숫자를 제외한 문자"를 공백으로 치환하고
+  // 문자열의 처음부터 numcount에 해당하는 인덱스를 잘라 str 변수에 저장한다.
+
   var chrAt;
   var validx = 0;
   for ( var n = 0; n < format.length; n++ )
   {
     chrAt = format.charAt(n);
+    // 입력받은 format의 n에 해당하는 문자를 저장하고
     rv += ( chrAt == '#' ) ? str.charAt(validx++) : chrAt;
+    // charAt이 #이라면 str의 validx에 해당하는 문자를 추가하고
+    // 아니라면 숫자만 추가한다.
+
     if ( validx >= str.length ) break;
+    // validx 가 str의 길이보다 커지면 해당 반복문을 종료한다.
   }
   return rv;
 }
@@ -314,7 +340,7 @@ function countChr(str, chr)
     if ( !arguments.length ) {
       if ( elem ) {
         hooks = jQuery.valHooks[ elem.nodeName.toLowerCase() ] || jQuery.valHooks[ elem.type ];
-
+        // 
         if ( hooks && "get" in hooks && (ret = hooks.get( elem, "value" )) !== undefined && (ret = hooks.get( elem, "value" )) !== "undefined" ) {
           return ret;
         }
@@ -368,6 +394,48 @@ function countChr(str, chr)
       }
     });
   }
+```
+
+## formatComma()
+```js
+/**
+ * 숫자 문자열에 ,(콤마)
+ * @param numstr
+ * @return
+ */
+function formatComma(numstr)
+{
+  numstr = deletePrecedingZero(numstr.replace(/\D/g, ""));
+  // 정규표현식 적용, "문자열 내의 모든 숫자를 제외한 문자"를 공백으로 치환한 후에 선행하는 0을 제거한다.
+  var rv = "";
+  var idx = 0;
+  for ( var n = numstr.length - 1; n >= 0; n-- )
+  {
+    if ( idx != 0 && idx % 3 == 0 ) rv = "," + rv;
+    // idx 가 0이 아니고 3으로 나누어 떨어지면 rv 앞에 콤마를 추가한다.
+    rv = numstr.charAt(n) + rv;
+    // rv는 numstr의 n번째 문자에 rv를 더하여 저장한다.
+    idx++;
+  }
+  return rv;
+}
+```
+
+
+## deletePrecedingZero()
+```js
+/**
+ * 선행하는 0 제거
+ * @param numstr
+ * @return
+ */
+function deletePrecedingZero(numstr)
+{
+  var replaced = numstr.replace(/^0+/, "");
+  // 입력받은 numstr 중에 0이 있다면 제거하고 저장한다.
+  return numstr && ! replaced ? "0" : replaced;
+  // numstr이 없고 replaced가 없다면 0을 반환하고, 둘 중에 하나라도 아니라면 replaced를 반환한다.
+}
 ```
 
 
