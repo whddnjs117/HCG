@@ -101,16 +101,26 @@ function inputAutoUnformat(form, f, s)
     $("#"+form.prop("id")+" input[id^='" + f_ + "']").each(function(index){
         // 최초 #+form.prop("id")의 자식 input 개체 중 F_로 시작되는 모든 개체를 반복하며 수행
         s_name = s_ + $(this).attr("id").substr(f_.length);
+        // this의 id 속성에서 f_의 길이부터 시작한 모든 문자열을 가져와 s_와 결합하여 저장
         if($("#" + s_name).length == 0){
+        // s_name을 id로 가지는 개체가 존재하지 않으면
             var tmpHidden = $("<input type='hidden' id='" + s_name + "' name='" + s_name + "' />");
+            // 해당 이름을 id로 가지는 hidden 타입의 input 태그 생성
             form.append(tmpHidden);
+            // 생성된 input 태그를 form에 추가
         }
 
         $("#" + s_name).val(getNormalValue($(this)));
+        // $(this) 객체의 format 전의 원 데이터로 재포맷을 거치고 저장함
+        
+        // getNormalValue 내부의 restoreValue는 data_format에 지정된 형태의 값이 존재하면
+        // 정규표현식을 통해 문자열변환 후 반환한다.
+        // data_format이 없거나 주어지는 나머지 파라미터도 존재하지 않으면 ""을 반환한다.
     });
 
 
     //multi-combobox F_ 의 value 가 아닌 val() 를 hidden에 2016.10.13
+    // 위와 같음
     $("#"+form.prop("id")+" select[id^='" + f_ + "']").each(function(index){
 
         s_name = s_ + $(this).attr("id").substr(f_.length);
