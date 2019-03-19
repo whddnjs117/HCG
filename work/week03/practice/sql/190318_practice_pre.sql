@@ -1,3 +1,5 @@
+-- 연습용 테이블 생성(20190318)
+
 CREATE TABLE ZZ1010
 (
 C_CD VARCHAR2(20) NOT NULL ,
@@ -39,3 +41,39 @@ COMMENT ON COLUMN ZZ1010.INS_YMDHMS IS '입력일시';
 COMMENT ON COLUMN ZZ1010.INS_GYMDHMS IS '입력일시_현지';
 COMMENT ON COLUMN ZZ1010.MOD_YMDHMS IS '수정일시';
 COMMENT ON COLUMN ZZ1010.MOD_GYMDHMS IS '수정일시_현지';
+
+-------------------------------------------------------------------
+
+-- 연습용 테이블 조회 Query(20190319)
+
+SELECT T1.C_CD,
+       T1.EMP_ID,
+--        T2.EMP_NM,
+       T1.SEQ_NO,
+       T1.EQUIP_CD,
+       T1.STA_YMD,
+       T1.END_YMD,
+       T1.LAST_YN,
+       T1.NOTE,
+       T1.INS_USER_ID,
+       T1.MOD_USER_ID,
+       T1.INS_YMDHMS,
+       T1.INS_GYMDHMS,
+       T1.MOD_YMDHMS,
+       T1.MOD_GYMDHMS
+FROM ZZ1010 T1
+--    , PA1010 T2
+WHERE T1.C_CD = : C_CD
+  -- EMP_ID의 값이 들어오지 않을 수 있으므로 Default 값을 설정해줘야 함
+  AND (:EMP_ID IS NULL OR T1.EMP_ID = : EMP_ID)
+
+  -- 시작일은 종료일보다 작으면 되고 종료일은 시작일보다 크면 됨
+  AND T1.END_YMD >= :STA_YMD
+  AND T1.STA_YMD <= :END_YMD
+--   AND T1.END_YMD >= NVM(:STA_YMD, '19000101')
+--   AND T1.STA_YMD <= NVL(:END_YMD, '99991231')
+-- Java 단에서 StringUtil.nvl 을 이용해 Null 체크할 수 있음.
+
+--   AND T2.C_CD = T1.C_CD
+--   AND T2.EMP_ID = T1.EMP_ID
+;
