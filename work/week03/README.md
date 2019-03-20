@@ -450,7 +450,7 @@
   // inputSetValueAuto("F_STA_YMD", addYmd("<%=TO_YMD%>", "D", -7));
   // inputSetValueAuto("F_END_YMD", addYmd("<%=TO_YMD%>", "D", 7));
   // 기간 조회 default 값 설정
-  // nologin.jsp에 존재
+  // header_nologin.jsp에 존재
   inputSetValueAuto("F_STA_YMD", "<%=TO_YY%>" + "0101");
   inputSetValueAuto("F_END_YMD", "<%=TO_YY%>" + "1231");
   ```
@@ -609,6 +609,32 @@
 
 <br>
 <hr>
+
+# 화면 실습(3일차)
+- 테이블의 `최종여부` 컬럼을 `반납여부`로 교체할 것임
+  - [SQL](/work/week03/practice/sql/190320_practice_pre.sql)
+  - jsp, java, xml 파일의 "LAST_YN"을 "RETURN_YN"으로 변경
+
+- 메뉴의 h2태그를 설정하지 않았는데 자동으로 가져옴 : 다국어프로퍼티 작동
+  ```js
+  <h2 class="titA">
+    <%=StringUtil.nvl(request.getParameter("X_MENU_NM"), resourceLabel.getString("crt_emp_id"))%>
+  </h2>
+  ```
+
+- 브랜드 컬럼에 넣을 공통코드를 추가할 것임
+  - 코드 인덱스 추가(ZZ01)
+    - `/ZZ01`과 `ZZ01`의 차이
+
+  ![코드인덱스](/work/week03/images/18.jpg)
+  ![공통코드](/work/week03/images/19.jpg)
+
+- 컬럼 정보 설정과 조회, 추가 작성해보기
+  - pm_bas_560_f04.jsp
+    ```js
+    <span><select id="S_COPY_PROFILE_ID" name="S_COPY_PROFILE_ID" class="insert_select"></select></span>
+    ```
+
 
 # 3주차 과제
 - [Oracle SQL문을 작성하시오.](/work/week03/sql/Query03.md)
