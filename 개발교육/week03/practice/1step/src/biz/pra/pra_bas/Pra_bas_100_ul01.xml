@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='utf-8'?>
+<SQLResource version='1'>
+
+<query name='search01'><![CDATA[
+SELECT   T1.C_CD,
+    T1.EMP_ID,
+         EMP_NM,
+         PER_NO,
+         STD_YY,
+         EMP_TYPE,
+         RE_TYPE,
+         T1.MOD_YMDHMS,
+         EXPT_ENTER_YMD,
+        (SELECT CD 
+           FROM SY5020
+      WHERE C_CD = :C_CD
+        AND IDX_CD = '00060'
+        AND COND_CD1 = ( SELECT COM_NTNL_CD
+                               FROM SY5110 
+                               WHERE C_CD = :C_CD )) AS COM_NTNL_CD,
+         CASE
+           WHEN EXISTS(SELECT 'X'
+                         FROM VR_PA1010
+                        WHERE C_CD = T1.C_CD
+                          AND EMP_ID = T1.EMP_ID)
+             THEN 'Y'
+           ELSE 'N'
+         END USE_YN2,
+         BF_C_CD,
+         BF_EMP_ID,
+         T1.INS_USER_ID,
+         T2.USER_NM,
+         T1.INS_USER_ID||'/'||T2.USER_NM INS_USER_NM
+        ,T1.RE_SEQ_NO
+        ,T1.SUPT_NO
+    FROM VR_PA1050 T1,
+       SY4100 T2
+   WHERE T1.C_CD = :C_CD
+     AND T1.C_CD =  T2.C_CD
+     AND T1.INS_USER_ID = T2.USER_ID
+     AND EXPT_ENTER_YMD BETWEEN :STA_YMD AND :END_YMD
+@BLOCK@     
+ORDER BY EMP_ID
+]]></query>
+
+</SQLResource>
