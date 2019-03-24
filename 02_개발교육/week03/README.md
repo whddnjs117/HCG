@@ -458,6 +458,32 @@
 <br>
 <hr>
 
+# 15일차 CSS 교육
+- display 속성
+  - block과 inline의 차이
+  - inline-block
+- position 속성
+  - absoulute
+  - relative
+  - z-index
+
+## css
+- 장점
+  - Variables
+    - 변수의 사용이 가능
+    - 수치, 컬러값, 폰트 등의 설정값을 변수로 저장할 수 있다.
+  - Nesting
+    - Css에서 사용하는 cascading을 일반적인 hierarchy 구조로 작성
+  - Import
+  - Mixins
+    - 파라미터에 따라 내용이 달라지는 상용구를 함수형태로 만들어 include 할 수 있음
+  - Operators
+    - 계산식의 사용가능
+
+<br>
+<hr>
+
+
 # 3주차 과제
 - [Oracle SQL문을 작성하시오.](/work/week03/sql/Query03.md)
 
