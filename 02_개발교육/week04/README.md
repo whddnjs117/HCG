@@ -149,3 +149,52 @@ function doApplyBefore()
      - 승인 : ADMIN
   4. 프로그램관리 화면에서 신청, 결제, 승인 프로그램 추가 
   5. 프로파일별메뉴관리 화면에서 신청, 결제, 승인 프로그램 등록
+
+# 19일차 개발 교육 - SVN
+https://192.168.1.201:443/svn/REPORT_EHRS_WEB_STAND/
+
+jadclipse
+
+hunel 유저
+USER : REPORT_HUNEL
+PW : REPORTHUNEL
+
+분리보관유저
+USER : HUNELHTMLEHR_RET
+PW : REPORT!HUNEL
+
+URL / PORT / SID : 192.168.1.201:1521:orcl
+
+```xml
+  <!-- 로컬 테스트 환경-->
+  <Service name="HUNELWEBSTAND">
+    <Connector URIEncoding="utf-8" compressableMimeType="text/html,text/plain,text/xml,text/html,application/json,text/css,application/javascript,application/x-javascript" compression="on" compressionMinSize="256" connectionTimeout="20000" port="8100" protocol="HTTP/1.1" redirectPort="8443"/>
+    <Connector URIEncoding="utf-8" maxParameterCount="-1" maxPostSize="-1" port="8297" protocol="AJP/1.3" redirectPort="8443"/>
+    <Engine defaultHost="localhost" name="HUNELWEBSTAND">
+      <Realm className="org.apache.catalina.realm.UserDatabaseRealm" resourceName="UserDatabase"/>
+      <Host appBase="webapps" autoDeploy="true" name="localhost" unpackWARs="true" xmlNamespaceAware="false" xmlValidation="false">
+        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="common" prefix="hunel_access_log." resolveHosts="false" suffix=".txt"/>
+          <Context docBase="C:/EHR_PROJECT/HUNEL_EHRS_WEB_STAND/WebRoot" path="" privileged="true" reloadable="true">
+          <Resource auth="Container" connectionProperties="SetBigStringTryClob=true" driverClassName="oracle.jdbc.driver.OracleDriver" factory="org.apache.tomcat.dbcp.dbcp.BasicDataSourceFactory" maxActive="20" maxIdle="10" name="HUNELWEBSTAND" password="HUNEL!STANDARD" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:orcl" username="HUNELSTANDARD" validationQuery="SELECT 1 FROM DUAL"/>
+          <Resource auth="Container" connectionProperties="SetBigStringTryClob=true" driverClassName="oracle.jdbc.driver.OracleDriver" factory="org.apache.tomcat.dbcp.dbcp.BasicDataSourceFactory" maxActive="20" maxIdle="10" name="HUNELWEBSTAND_RET" password="HUNEL!STANDARD" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:orcl" username="HUNELHTMLEHR_RET" validationQuery="SELECT 1 FROM DUAL"/>
+        </Context>
+        </Host>
+    </Engine>
+  </Service>
+  
+    <!-- 서버 프로젝트 환경-->
+  <Service name="REPORT_HUNELWEBSTAND">
+    <Connector URIEncoding="utf-8" compressableMimeType="text/html,text/plain,text/xml,text/html,application/json,text/css,application/javascript,application/x-javascript" compression="on" compressionMinSize="256" connectionTimeout="20000" port="8200" protocol="HTTP/1.1" redirectPort="8443"/>
+    <Connector URIEncoding="utf-8" maxParameterCount="-1" maxPostSize="-1" port="8297" protocol="AJP/1.3" redirectPort="8443"/>
+    <Engine defaultHost="localhost" name="REPORT_HUNELWEBSTAND">
+      <Realm className="org.apache.catalina.realm.UserDatabaseRealm" resourceName="UserDatabase"/>
+      <Host appBase="webapps" autoDeploy="true" name="localhost" unpackWARs="true" xmlNamespaceAware="false" xmlValidation="false">
+        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="common" prefix="hunel_access_log." resolveHosts="false" suffix=".txt"/>
+          <Context docBase="C:/EHR_PROJECT/REPORT_EHRS_WEB_STAND/WebRoot" path="" privileged="true" reloadable="true">
+          <Resource auth="Container" connectionProperties="SetBigStringTryClob=true" driverClassName="oracle.jdbc.driver.OracleDriver" factory="org.apache.tomcat.dbcp.dbcp.BasicDataSourceFactory" maxActive="20" maxIdle="10" name="REPORT_HUNEL" password="REPORTHUNEL" type="javax.sql.DataSource" url="jdbc:oracle:thin:@192.168.1.201:1521:orcl" username="REPORT_HUNEL" validationQuery="SELECT 1 FROM DUAL"/>
+          <Resource auth="Container" connectionProperties="SetBigStringTryClob=true" driverClassName="oracle.jdbc.driver.OracleDriver" factory="org.apache.tomcat.dbcp.dbcp.BasicDataSourceFactory" maxActive="20" maxIdle="10" name="HUNELHTMLEHR_RET" password="REPORT!HUNEL" type="javax.sql.DataSource" url="jdbc:oracle:thin:@192.168.1.201:1521:orcl" username="HUNELHTMLEHR_RET" validationQuery="SELECT 1 FROM DUAL"/>
+        </Context>
+      </Host>
+    </Engine>
+  </Service>
+```
