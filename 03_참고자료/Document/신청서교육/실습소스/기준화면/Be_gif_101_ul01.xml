@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<SQLResource version='1'>
+
+<query name='search01'><![CDATA[
+SELECT T1.GIF_TYPE,
+       T1.GIF_MON,
+       T1.NOTE
+  FROM GIF020 T1
+ WHERE T1.C_CD = :C_CD
+ORDER BY T1.GIF_TYPE
+]]></query>
+</SQLResource>

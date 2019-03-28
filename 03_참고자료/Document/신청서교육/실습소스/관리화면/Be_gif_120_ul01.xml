@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<SQLResource version='1'>
+
+<query name='search01'><![CDATA[
+SELECT T2.EMP_ID,
+       T2.EMP_NM,
+       T2.ORG_NM,
+       T2.EMP_GRADE_NM,
+       T1.GIF_TYPE,
+       T1.GIF_MON,
+       T1.NOTE,
+       T1.DATA_ID,
+       T1.APPL_ID,
+       T1.IN_TYPE
+  FROM GIF220 T1,
+       PA1020_V_1 T2
+ WHERE T1.C_CD 		= :C_CD
+   AND T2.LANG_TYPE = :LANG_TYPE
+   AND T2.C_CD 		= T1.C_CD
+   AND T2.EMP_ID 	= T1.EMP_ID
+ ORDER BY
+       T1.EMP_ID
+]]></query>
+
+</SQLResource>

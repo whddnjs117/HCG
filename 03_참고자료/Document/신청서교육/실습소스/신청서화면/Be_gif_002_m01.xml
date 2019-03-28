@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='utf-8'?>
+<SQLResource version='1'>
+
+<query name='search01'><![CDATA[
+SELECT T1.C_CD, 
+       T1.APPL_ID, 
+       T1.GIF_TYPE, 
+       T1.GIF_MON, 
+       T1.NOTE, 
+       T2.APPL_STAT_CD
+  FROM GIF210 T1, 
+  	   SY7010 T2
+ WHERE T1.C_CD = :C_CD
+   AND T1.APPL_ID = :APPL_ID
+   AND T1.C_CD = T2.C_CD
+   AND T1.APPL_ID = T2.APPL_ID
+]]></query>
+
+<query name='gifType'><![CDATA[
+SELECT T1.GIF_MON
+  FROM GIF020 T1
+ WHERE T1.C_CD = :C_CD
+   AND T1.GIF_TYPE = :GIF_TYPE
+]]></query>
+
+<query name='onApplComplete'><![CDATA[
+INSERT
+  INTO GIF220
+       (
+        C_CD
+      , DATA_ID
+      , EMP_ID
+      , GIF_TYPE
+      , GIF_MON
+      , NOTE
+      , IN_TYPE
+      , APPL_ID
+      , MOD_USER_ID
+      , MOD_YMDHMS
+       )
+SELECT T1.C_CD
+     , :DATA_ID
+     , T2.TRG_EMP_ID
+     , T1.GIF_TYPE
+     , T1.GIF_MON
+     , T1.NOTE
+     , '20'
+     , T1.APPL_ID
+     , :MOD_USER_ID
+     , SYSDATE
+  FROM GIF210 T1
+     , SY7010 T2
+ WHERE T1.C_CD = :C_CD
+   AND T1.APPL_ID = :APPL_ID
+   AND T1.C_CD = T2.C_CD
+   AND T1.APPL_ID = T2.APPL_ID
+]]></query>
+
+</SQLResource>
