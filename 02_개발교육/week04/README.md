@@ -75,69 +75,84 @@
   - 신청서에서 공통적으로 사용되는 Input(hidden type)을 정의
 
 #### 필수 코드
-```js
-<script type='text/javascript' src='/common/js/sys_appl.js'></script>
-```
-```js
-<%@include file="/sys/sy_appl/sys_appl_000_c01.jsp"%>
-<%@include file="/sys/sy_appl/sys_appl_100_c01.jsp"%>
-```
-```js
-<div class="hbox" boxsize="35" id="applButton"></div>
-<div class="hbox" boxsize="125" id="applTop" style="display:none"></div>
-<div class="hbox yscroll" id="maincontent">
-<!-- 이곳에 신청서 내용작성 -->
-</div>
-```
-```js
-<!-- 신청서 공통 start -->
-<div class="hiddenZone">
-  <textarea id="xmlApplTypeInfo" >
-    <%=hmPreparedData.get("xmlApplTypeInfo") %>
-  </textarea>
-</div>
-<!-- end -->
-```
+- 공통 스크립트 include
+  ```js
+  <script type='text/javascript' src='/common/js/sys_appl.js'></script>
+  ```
+- 신청/결재/승인 프로세스별 jsp include
+  ```js
+  <%@include file="/sys/sy_appl/sys_appl_000_c01.jsp"%>
+  <%@include file="/sys/sy_appl/sys_appl_100_c01.jsp"%>
+  ```
+- 신청서의 내용을 작성하는 form 영역
+  ```js
+  <div class="hbox" boxsize="35" id="applButton"></div>
+  <div class="hbox" boxsize="125" id="applTop" style="display:none"></div>
+  <div class="hbox yscroll" id="maincontent">
+  <!-- 이곳에 신청서 내용작성 -->
+  </div>
+  ```
+- 신청서에 대한 공통 영역
+  ```js
+  <!-- 신청서 공통 start -->
+  <div class="hiddenZone">
+    <textarea id="xmlApplTypeInfo" >
+      <%=hmPreparedData.get("xmlApplTypeInfo") %>
+    </textarea>
+  </div>
+  <!-- end -->
+  ```
 
 #### 필요에 따라 개발/추가하는 코드
-```js
-function LoadPage()
-{
-  ...
-  Apply.init();
-}
-
-function doSearch(applStatus, isReapply) 
-{
-  //상태와  재신청 등의 경우에 따라 조회
-  //ajax로 조회하여 inputSetValueAuto 등을 이용하여 화면에 데이터를 뿌려준다
-}
-
-function doValidation()
-{
-  //저장전 valid  체크
-}
-
-function doSaveBefore() 
-{
-  if( !doValidation() )
+- 최종적으로 sys_appl.js의 init 함수를 호출
+  ```js
+  function LoadPage()
   {
-    return false;    
+    ... // 초기화 전 필요한 로직 기술
+    Apply.init();
   }
-  ….//validation 외에 저장전 해야 하는 내용을 기술
-  return true;
-}
-
-function doApplyBefore() 
-{
-  if( !doValidation() )
+  ```
+- 신청서 공통 조회 함수
+  ```js
+  function doSearch(applStatus, isReapply) 
   {
-    return false;    
+    //상태와  재신청 등의 경우에 따라 조회
+    //ajax로 조회하여 inputSetValueAuto 등을 이용하여 화면에 데이터를 뿌려준다
   }
-  …//validation 외에 신청전 해야 하는 내용을 기술
-  return true;
-}
-```
+  ```
+- 함수의 유효성여부 체크
+  ```js
+  function doValidation()
+  {
+    //저장전 valid  체크
+  }
+  ```
+- 신청 전 처리함수
+  ```js
+  // 저장 전 처리함수
+  function doSaveBefore() 
+  {
+    if( !doValidation() )
+    {
+      return false;    
+    }
+    ... //validation 외에 저장전 해야 하는 내용을 기술
+    return true;
+  }
+
+  /**************************************************/
+
+  // 신청 전 처리함수
+  function doApplyBefore() 
+  {
+    if( !doValidation() )
+    {
+      return false;    
+    }
+    ... //validation 외에 신청전 해야 하는 내용을 기술
+    return true;
+  }
+  ```
 
 ## 실습
 - 신청서 메뉴 등록하고 화면에 띄우기
