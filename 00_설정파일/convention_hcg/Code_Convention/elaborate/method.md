@@ -1,3 +1,15 @@
+# 목차
+
+- [목차](#%EB%AA%A9%EC%B0%A8)
+- [메소드](#%EB%A9%94%EC%86%8C%EB%93%9C)
+  - [JavaScript Function](#javascript-function)
+  - [Java Method](#java-method)
+  - [XML query name](#xml-query-name)
+
+<br>
+<br>
+<hr>
+
 # 메소드
 ## JavaScript Function
 - JavaScript의 doAction Function 파라미터 값(sAction)을 Java의 Method명, XML query의 name명으로 동일하게 맞춰준다.
@@ -66,12 +78,33 @@
     line.getLineLength()
     ```
 
+<br>
+
+[뒤로](https://github.com/InSeong-So/HCG_OJT/README.md/#목차) / [위로](#목차)
+
+<br>
+<hr>
+
 ## Java Method
 - JavaScript의 hidden object, S_DSMETHOD value값과 동일하다.
 - JavaScript의 doAction Parameter값과 동일하다.
 - 기본적으로 카멜표기법을 사용한다.
 
+<br>
+
+[뒤로](https://github.com/InSeong-So/HCG_OJT/README.md/#목차) / [위로](#목차)
+
+<br>
+<hr>
+
 ## XML query name
 - JavaScript의 hidden object, S_DSMETHOD value값과 동일하다.
 - JavaScript의 doAction Parameter값과 동일하다.
 - Java Method명과 동일하다.
+
+<br>
+
+[뒤로](https://github.com/InSeong-So/HCG_OJT/README.md/#목차) / [위로](#목차)
+
+<br>
+<hr>

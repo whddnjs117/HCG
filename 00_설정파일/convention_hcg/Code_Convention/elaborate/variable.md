@@ -1,8 +1,19 @@
+# 목차
+
+- [변수](#변수)
+    - [Java, JSP 변수명](#java-jsp-변수명)
+    - [JavaScript 변수명](#javascript-변수명)
+    - [사용자 정의 변수](#사용자-정의-변수)
+
+<br>
+<br>
+<hr>
+
 # 변수
 ## Java, JSP 변수명
 - 클래스 명칭은 기본적으로 파스칼 표기법을 사용한다.
 - 일반 변수명은 기본적으로 카멜표기법을 사용한다.
-- 지역변수 : DB컬럼명이나 파라미터를 저장하는 변수는 DB컬럼명 또는 파라미터명과 이름을 동일하게 사용한다( 대문자 ).
+- 지역변수 : DB컬럼명이나 파라미터를 저장하는 변수는 이름을 동일하게 사용한다( 대문자 ).
     ```java
     String S_PGM_ID = form.getValue("S_PGM_ID");
     String S_SEL_YN = StringUtil.nvl(request.getParameter("S_SEL_YN"),"N");
@@ -12,9 +23,16 @@
     String m_abc = null;
     ```
 
+<br>
+
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+
+<br>
+<hr>
+
 ## JavaScript 변수명
-- 일반 변수명은 기본적으로 카멜표기법을 사용한다.
-- 지역변수 : DB컬럼명이나 파라미터를 저장하는 변수는 DB컬럼명 또는 파라미터 이름을 동일하게 사용한다( 대문자 ).
+- 일반 변수명은 기본적으로 `카멜표기법`을 사용한다.
+- 지역변수 : DB컬럼명이나 파라미터를 저장하는 변수는 이름을 동일하게 사용한다( 대문자 ).
     ```js
     var S_EMP_ID = $("#S_SAVENAME").val(); 
     ```
@@ -22,6 +40,13 @@
     ```js
     var g_time = new Date;
     ```
+
+<br>
+
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+
+<br>
+<hr>
 
 ## 사용자 정의 변수
 - 같은 의미의 변수명은 모든 페이지에서 동일하게 사용하며, 변수의 재사용을 권한다.
@@ -49,3 +74,10 @@
     |_mon| ~금/~액/~비/~가|tot_mon / 총액 |
     |_rank| 순위|tot_rank / 전체순위 |
     |_tax| 세금/세|incom_tax / 소득세  |
+    
+<br>
+
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+
+<br>
+<hr>

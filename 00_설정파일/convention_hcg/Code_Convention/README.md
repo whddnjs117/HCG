@@ -1,5 +1,4 @@
 # 목차 
-
 - [목차](#%EB%AA%A9%EC%B0%A8)
 - [HCG Code Convention](#hcg-code-convention)
   - [Basic Rule](#basic-rule)
@@ -31,8 +30,8 @@
     - [시스템(System Administration, **`sys`**)](#%EC%8B%9C%EC%8A%A4%ED%85%9Csystem-administration-sys)
   - [Directory Structure](#directory-structure)
   - [Program Naming](#program-naming)
-    - [Variable](#variable)
-    - [Method](#method)
+    - [Variable 변수 명명 규칙](#variable-%EB%B3%80%EC%88%98-%EB%AA%85%EB%AA%85-%EA%B7%9C%EC%B9%99)
+    - [Method 메소드 명명 규칙](#method-%EB%A9%94%EC%86%8C%EB%93%9C-%EB%AA%85%EB%AA%85-%EA%B7%9C%EC%B9%99)
     - [프로그램 ID Rule](#%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8-id-rule)
     - [업무JSP 파일명](#%EC%97%85%EB%AC%B4jsp-%ED%8C%8C%EC%9D%BC%EB%AA%85)
     - [Report 파일명](#report-%ED%8C%8C%EC%9D%BC%EB%AA%85)
@@ -43,6 +42,10 @@
     - [CSS](#css)
     - [JS](#js)
     - [JSP](#jsp)
+
+<br>
+<br>
+<hr>
 
 # HCG Code Convention
 ## Basic Rule
@@ -110,6 +113,10 @@
 
 <br>
 
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+
+<br>
+
 ## Comment
 ### Variable Comment
 ```js
@@ -123,11 +130,20 @@ String user_nm  = null; // 추가적인 변수 선언에 대한 코멘트
 
 <br>
 
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+
+<br>
+
 ### Code Comment
 ```js
 // 해당 테이블의 정보를 구한다.
 vect = remote.selectCodeList2(table_id, col_cd, col_nm, syntax, size);
 ```
+
+<br>
+
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+
 <br>
 
 ### JSP Comment
@@ -140,6 +156,11 @@ vect = remote.selectCodeList2(table_id, col_cd, col_nm, syntax, size);
                   2009-07-15 무슨 무슨 내용 수정 [수정자이름]
 --%>
 ```
+
+<br>
+
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+
 <br>
 
 ### Java Comment
@@ -152,6 +173,11 @@ vect = remote.selectCodeList2(table_id, col_cd, col_nm, syntax, size);
  * @author      : 홍길동
  */
 ```
+
+<br>
+
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+
 <br>
 
 ### Java Method Comment
@@ -163,6 +189,11 @@ vect = remote.selectCodeList2(table_id, col_cd, col_nm, syntax, size);
 * @throws SQLException
 */
 ```
+
+<br>
+
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+
 <br>
 
 ### DB Procedure, Function Comment
@@ -175,6 +206,11 @@ vect = remote.selectCodeList2(table_id, col_cd, col_nm, syntax, size);
                   2009-07-15 무슨 무슨 내용 수정 [수정자이름]
 ******************************************************/
 ```
+
+<br>
+
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+
 <br>
 
 ## Module Naming Rule
@@ -190,10 +226,18 @@ vect = remote.selectCodeList2(table_id, col_cd, col_nm, syntax, size);
 
 <br>
 
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+
+<br>
+
 ### 직무역량(Job & Competency Management, **`jcm`**)
 | Sub Module ID        | Sub Module 명           |
 | :------------------- |:---------------       |
 | jm_job 	           | 직무관리                 |
+
+<br>
+
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
 
 <br>
 
@@ -210,6 +254,10 @@ vect = remote.selectCodeList2(table_id, col_cd, col_nm, syntax, size);
 
 <br>
 
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+
+<br>
+
 ### 근태(Time & Absence Management, **`tam`**)
 | Sub Module ID        | Sub Module 명           |
 | :------------------- |:---------------       |
@@ -218,6 +266,10 @@ vect = remote.selectCodeList2(table_id, col_cd, col_nm, syntax, size);
 |tm_month	|월근태관리|
 |tm_quota|	연월차관리|
 |tm_stat	|근태통계/현황|
+
+<br>
+
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
 
 <br>
 
@@ -233,6 +285,10 @@ vect = remote.selectCodeList2(table_id, col_cd, col_nm, syntax, size);
 
 <br>
 
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+
+<br>
+
 ### 소득정산(Adjustment, **`adj`**)
 | Sub Module ID        | Sub Module 명           |
 | :------------------- |:---------------       |
@@ -241,6 +297,10 @@ vect = remote.selectCodeList2(table_id, col_cd, col_nm, syntax, size);
 |adj_exec|	소득정산 수행|
 |adj_ret|	퇴직자 소득정산|
 |adj_stat|	소득정산출력|
+
+<br>
+
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
 
 <br>
 
@@ -254,6 +314,10 @@ vect = remote.selectCodeList2(table_id, col_cd, col_nm, syntax, size);
 |be_club|	동호회|
 |be_loan|	대출|
 |be_condo|	콘도, 휴게소, 문화시설|
+
+<br>
+
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
 
 <br>
 
@@ -271,6 +335,10 @@ vect = remote.selectCodeList2(table_id, col_cd, col_nm, syntax, size);
 
 <br>
 
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+
+<br>
+
 ### 총무(General Management, **`gen`**)
 | Sub Module ID        | Sub Module 명           |
 | :------------------- |:---------------       |
@@ -279,6 +347,10 @@ vect = remote.selectCodeList2(table_id, col_cd, col_nm, syntax, size);
 |ge_eqp|	소모품관리|
 |ge_doc|	문서수발|
 |ge_btr|	출장관리|
+
+<br>
+
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
 
 <br>
 
@@ -294,11 +366,19 @@ vect = remote.selectCodeList2(table_id, col_cd, col_nm, syntax, size);
 
 <br>
 
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+
+<br>
+
 ### 보상관리(Compensation Management, **`cm`**)
 | Sub Module ID        | Sub Module 명           |
 | :------------------- |:---------------       |
 |cm_bas|	보상기준|
 |cm_bonus|	보상시뮬레이션|
+
+<br>
+
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
 
 <br>
 
@@ -312,6 +392,10 @@ vect = remote.selectCodeList2(table_id, col_cd, col_nm, syntax, size);
 |cd_mentor |	멘토링|
 |cd_sp|	후임자관리|
 |cd_match| 	profile match-up|
+
+<br>
+
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
 
 <br>
 
@@ -330,6 +414,10 @@ vect = remote.selectCodeList2(table_id, col_cd, col_nm, syntax, size);
 
 <br>
 
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+
+<br>
+
 ### 시스템(System Administration, **`sys`**)
 | Sub Module ID        | Sub Module 명           |
 | :------------------- |:---------------       |
@@ -344,6 +432,10 @@ vect = remote.selectCodeList2(table_id, col_cd, col_nm, syntax, size);
 |sy_com|	공통기본기능|
 |sy_sql|	조건검색|
 |sy_widget|	위젯관리|
+
+<br>
+
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
 
 <br>
 
@@ -369,19 +461,37 @@ vect = remote.selectCodeList2(table_id, col_cd, col_nm, syntax, size);
 
 <br>
 
-## Program Naming
-### [Variable](elaborate/variable.md)
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
 
 <br>
 
-### [Method](elaborate/method.md)
+## Program Naming
+### [Variable](elaborate/variable.md) 변수 명명 규칙
+
+<br>
+
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+
+<br>
+
+### [Method](elaborate/method.md) 메소드 명명 규칙
+
+<br>
+
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
 
 <br>
 
 ### 프로그램 ID Rule
-- 서브모듈_XXX(Serial NO) (ex) pa_stat_350_sl01
-- Serial No : 서브모듈 아래 시퀀셜하게 붙는 번호로 000 ~ 999 범위에 속하며, 대체적으로 10에서 시작해서 10씩 증가한다.
-- 프로그램설계서의 "프로그램설계서ID"와 일치
+- 서브모듈_XXX(Serial NO)
+  - Serial No : 서브모듈 아래 시퀀셜하게 붙는 번호로 000 ~ 999 범위에 속하며, 대체적으로 10에서 시작해서 10씩 증가한다.
+  - ex) pa_stat_350_sl01
+
+- 프로그램 설계서의 `프로그램 설계서 ID` 와 일치
+
+<br>
+
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
 
 <br>
 
@@ -406,6 +516,9 @@ vect = remote.selectCodeList2(table_id, col_cd, col_nm, syntax, size);
   - sys_bas_510_m01.jsp (m: form, list, tab 등이 혼재된 복잡한 화면)
   - sys_bas_510_s01.jsp (form 만 존재하는 화면)
 
+<br>
+
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
 
 <br>
 
@@ -417,10 +530,17 @@ vect = remote.selectCodeList2(table_id, col_cd, col_nm, syntax, size);
 
 <br>
 
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+
+<br>
+
 ### HTML 파일명
 - JSP와 동일한 룰을 따르며 확장자만 html로 한다.
 - 파일 위치는 JSP 와 동일
 
+<br>
+
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
 
 <br>
 
@@ -431,6 +551,9 @@ vect = remote.selectCodeList2(table_id, col_cd, col_nm, syntax, size);
   - jsp : sys_bas_510_m01.jsp / Java : Sys_bas_510_m01.Java
   - jsp : sys_bas_510_p01.jsp / Java : Sys_bas_510_p01.Java
 
+<br>
+
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
 
 <br>
 
@@ -442,6 +565,10 @@ vect = remote.selectCodeList2(table_id, col_cd, col_nm, syntax, size);
 
 <br>
 
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+
+<br>
+
 ## Common Source Explain
 ### CSS
 | 소스명     | 설명   |
@@ -450,6 +577,9 @@ vect = remote.selectCodeList2(table_id, col_cd, col_nm, syntax, size);
 |Common.css|	hunel전체 페이지에서 공통으로 사용|
 |Login.css|	Login.jsp에서 사용|
 
+<br>
+
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
 
 <br>
 
@@ -469,6 +599,9 @@ vect = remote.selectCodeList2(table_id, col_cd, col_nm, syntax, size);
 |DD_belatedPNG_0.0.8a-min.js| 	IE 6.0 에서 png 파일 투명 지원|
 |sys_appl.js| 	신청서 관련 function 정의|
 
+<br>
+
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
 
 <br>
 
@@ -487,3 +620,9 @@ vect = remote.selectCodeList2(table_id, col_cd, col_nm, syntax, size);
 |ibsheetResultXML.jsp| 	ibsheet 조회용 xml 생성|
 |modal.jsp| 	modal 창 띄울 때 보안상 실제 file path 를  hidden 시키기 위해 사용 |
 |popup_wait.jsp| 	popup, modal, iframe loading 시 progress bar 를 보여준다. |
+
+<br>
+
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+
+<br>
