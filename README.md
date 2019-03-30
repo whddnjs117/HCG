@@ -1,9 +1,3 @@
-# 목차
-
-<br>
-<br>
-<hr>
-
 # 설정파일
 ## 개발표준
 - [메소드](/00_설정파일/convention_hcg/Code_Convention/elaborate/method.md)

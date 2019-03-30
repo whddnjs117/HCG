@@ -13,6 +13,7 @@
 # 메소드
 ## JavaScript Function
 - JavaScript의 doAction Function 파라미터 값(sAction)을 Java의 Method명, XML query의 name명으로 동일하게 맞춰준다.
+
     | 파일 종류     | 유형   | 동일 값 |
     | :-------- |:------ |:------ |
     |.JSP|	`Function(파라미터)[doAction(sAction)]`|	save01|
@@ -22,6 +23,7 @@
     <br>
 
 - 자주 사용하는 아래의 Method들은 이름을 지켜주며, 필요에 따라 시퀀셜하게 번호를 붙여준다.
+
     | 기능     | Method Name   | 예시 |
     | :-------- |:------ |:------ |
     |조회|	searchXX|	search01, search02|
@@ -35,6 +37,7 @@
     <br>
 
 - 축약형(Abbreviation)과 두문자어형(頭文字語: Acronym)을 이름에 사용할 경우에는 전부 대문자로 지정하지 않는다.(카멜표기법)
+
     | 올바른 방법     | 틀린 방법   |
     | :-------- |:------ |
     |exportHtmlSource()|	exportHTMLSource()|
@@ -80,7 +83,7 @@
 
 <br>
 
-[뒤로](https://github.com/InSeong-So/HCG_OJT/README.md/#목차) / [위로](#목차)
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
 
 <br>
 <hr>
@@ -92,7 +95,7 @@
 
 <br>
 
-[뒤로](https://github.com/InSeong-So/HCG_OJT/README.md/#목차) / [위로](#목차)
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
 
 <br>
 <hr>
@@ -104,7 +107,7 @@
 
 <br>
 
-[뒤로](https://github.com/InSeong-So/HCG_OJT/README.md/#목차) / [위로](#목차)
+[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
 
 <br>
 <hr>
