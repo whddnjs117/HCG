@@ -297,7 +297,7 @@
 - 내부변수
   - SCALR : V_[컬럼명]
   - TYPE : V_[컬럼명]
-  - ROWTYPE : ROW_[TABLE 명의 헤더]
+  - ROWTYPE : ROW_[TABLE명_헤더]
   - RECORD : RC_[사용자정의]
   - COLLECT : CT_[사용자정의]
 
