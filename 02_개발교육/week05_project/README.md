@@ -104,3 +104,12 @@ MOD_GYMDHMS     수정일시_현지
 - 버튼은 2~3개까지
 - 촬영 사진은 고용량이므로 패킷 교환량이 순식간에 올라간다.
   - resize를 통해 원본이미지에서 효율적인 크기/용량의 이미지를 새로 작성한다.
+
+
+# 콤보
+
+급여관리 - 고정급관리
+      ajaxSyncRequestXS($("#S_DSCLASS").val(), "<com:otp value='selPayItem'/>", {S_STA_YM:sta_ym, S_END_YM : end_ym, S_PAYITEM_TYPE : $("#S_PAYITEM_TYPE").val()}, function(xs)
+      {
+        setCombo(xs, "S_PAYITEM", null, "A");
+      });
