@@ -113,3 +113,136 @@ MOD_GYMDHMS     수정일시_현지
       {
         setCombo(xs, "S_PAYITEM", null, "A");
       });
+
+
+# 이슈 정리
+- 유니폼지급회차관리
+  - 유니폼지급대상자관리 팝업창
+  - 유니폼상세 사이즈별 도움말 처리
+- 유니폼지급대상자관리
+  - 복수 데이터 추가
+  - 하위 조직까지 검색
+- 유니폼신청
+- 유니폼신청결재
+- 유니폼신청승인
+- 유니폼지급현황
+- 유니폼신청관리
+
+
+```SQL
+  INSERT INTO PR3210_TMP (C_CD, EMP_ID, GIV_STD_ID, ORG_ID, EMP_GRADE_CD)
+  SELECT T1.C_CD,
+         T1.EMP_ID,
+         I_GIV_TRG_NM,
+         T2.ORG_ID,
+         T2.EMP_GRADE_CD
+  FROM PA1010 T1,
+       PA1020 T2
+  WHERE T1.C_CD = I_C_CD
+    AND T2.C_CD = T1.C_CD
+    AND (I_ORG_ID IS NULL OR T2.ORG_ID = I_ORG_ID)
+    AND T2.EMP_ID = T1.EMP_ID
+    AND (I_EMP_GRADE_CD IS NULL OR T2.EMP_GRADE_CD = I_EMP_GRADE_CD)
+    AND (I_GENDER_TYPE IS NULL OR T1.GENDER_TYPE = I_GENDER_TYPE)
+    AND T1.STAT_CD LIKE '1%'
+    AND T2.LAST_YN = 'Y'
+    AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN T2.STA_YMD AND T2.END_YMD
+    AND T2.ORG_ID IN (
+    SELECT O.OBJ_ID
+    FROM (
+           SELECT T1.*
+           FROM SY3020 T1
+           WHERE T1.C_CD = '10'
+             AND T1.OBJ_TYPE IN (
+             SELECT A.OBJ_TYPE
+             FROM SY3080 A
+             WHERE A.C_CD = '10'
+               AND A.OBJ_TREE_TYPE = 'ORGTREE'
+           )
+             AND TO_CHAR(CURRENT_TIMESTAMP, 'YYYYMMDD') BETWEEN T1.STA_YMD AND T1.END_YMD) O
+    START WITH O.C_CD = '10'
+           AND O.OBJ_TYPE = 'O'
+           AND (I_ORG_ID IS NULL OR O.OBJ_ID = I_ORG_ID)
+           AND O.PAR_OBJ_TYPE IN ('O', 'RT')
+           AND TO_CHAR(CURRENT_TIMESTAMP, 'YYYYMMDD') BETWEEN O.STA_YMD AND O.END_YMD
+    CONNECT BY PRIOR O.C_CD = O.C_CD
+           AND PRIOR O.OBJ_TYPE = O.PAR_OBJ_TYPE
+           AND PRIOR O.OBJ_ID = O.PAR_OBJ_ID);
+```
+
+
+SELECT T1.C_CD,
+       T1.UNIF_CD,
+       T1.UNIF_NM,
+       T1.UNIF_BRAND,
+       T1.GENDER_TYPE,
+
+       T1.TOP_SIZE,
+       CASE
+         WHEN T1.TOP_SIZE = 'F' THEN '65'
+         WHEN T1.TOP_SIZE = 'S' THEN '70'
+         WHEN T1.TOP_SIZE = 'M' THEN '72.5'
+         WHEN T1.TOP_SIZE = 'L' THEN '74'
+         WHEN T1.TOP_SIZE = 'XL' THEN '76.5'
+         END TOP_LEN,
+       CASE
+         WHEN T1.TOP_SIZE = 'F' THEN '52'
+         WHEN T1.TOP_SIZE = 'S' THEN '46'
+         WHEN T1.TOP_SIZE = 'M' THEN '49'
+         WHEN T1.TOP_SIZE = 'L' THEN '51.5'
+         WHEN T1.TOP_SIZE = 'XL' THEN '53'
+         END TOP_SHOL,
+       CASE
+         WHEN T1.TOP_SIZE = 'F' THEN '54'
+         WHEN T1.TOP_SIZE = 'S' THEN '52'
+         WHEN T1.TOP_SIZE = 'M' THEN '54.5'
+         WHEN T1.TOP_SIZE = 'L' THEN '56.5'
+         WHEN T1.TOP_SIZE = 'XL' THEN '59'
+         END TOP_CHES,
+       CASE
+         WHEN T1.TOP_SIZE = 'F' THEN '23'
+         WHEN T1.TOP_SIZE = 'S' THEN '22'
+         WHEN T1.TOP_SIZE = 'M' THEN '23.5'
+         WHEN T1.TOP_SIZE = 'L' THEN '25.5'
+         WHEN T1.TOP_SIZE = 'XL' THEN '27'
+         END TOP_SLEE,
+
+       T1.BOT_SIZE,
+       CASE
+         WHEN T1.BOT_SIZE = 'F' THEN '90'
+         WHEN T1.BOT_SIZE = 'S' THEN '93'
+         WHEN T1.BOT_SIZE = 'M' THEN '94'
+         WHEN T1.BOT_SIZE = 'L' THEN '95'
+         WHEN T1.BOT_SIZE = 'XL' THEN '96'
+         END BOT_LEN,
+       CASE
+         WHEN T1.BOT_SIZE = 'F' THEN '32'
+         WHEN T1.BOT_SIZE = 'S' THEN '33'
+         WHEN T1.BOT_SIZE = 'M' THEN '36'
+         WHEN T1.BOT_SIZE = 'L' THEN '39'
+         WHEN T1.BOT_SIZE = 'XL' THEN '42'
+         END BOT_WAIS,
+       CASE
+         WHEN T1.BOT_SIZE = 'F' THEN '33.5'
+         WHEN T1.BOT_SIZE = 'S' THEN '35'
+         WHEN T1.BOT_SIZE = 'M' THEN '36.5'
+         WHEN T1.BOT_SIZE = 'L' THEN '38'
+         WHEN T1.BOT_SIZE = 'XL' THEN '39.5'
+         END BOT_THIG,
+       CASE
+         WHEN T1.BOT_SIZE = 'F' THEN '26'
+         WHEN T1.BOT_SIZE = 'S' THEN '27'
+         WHEN T1.BOT_SIZE = 'M' THEN '28'
+         WHEN T1.BOT_SIZE = 'L' THEN '29'
+         WHEN T1.BOT_SIZE = 'XL' THEN '30'
+         END BOT_LOWE,
+       T1.GIV_END_YN,
+       T1.FILE_NO,
+       T1.NOTE
+FROM PR3110 T1
+WHERE T1.C_CD = :C_CD
+  AND (:UNIF_CD IS NULL OR T1.UNIF_CD = :UNIF_CD)
+  AND (:GENDER_TYPE IS NULL OR T1.GENDER_TYPE = :GENDER_TYPE)
+  AND (:TOP_SIZE IS NULL OR T1.TOP_SIZE = :TOP_SIZE)
+  AND (:BOT_SIZE IS NULL OR T1.BOT_SIZE = :BOT_SIZE)
+;

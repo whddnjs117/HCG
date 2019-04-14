@@ -216,6 +216,7 @@ URL / PORT / SID : 192.168.1.201:1521:orcl
 
 
 # 20일차 개발교육 - Report Designer
+- admin / hunel
 - RD_WEBROOT=localhost:8100
 - report.common.param : 폰트 설정 파일
 - secure.enable
