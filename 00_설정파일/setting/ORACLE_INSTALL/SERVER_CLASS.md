@@ -128,3 +128,6 @@
 
 - 배치 파일 ~~작성하기~~첨부
   - [오라클 서비스 시작 및 종료](00_설정파일/setting/ORACLE_INSTALL/batch/)
+
+## Reference
+[CURVC ALM Space](https://confluence.curvc.com/pages/viewpage.action?pageId=4358773)
