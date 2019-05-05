@@ -5,6 +5,9 @@
 <br>
 
 # 설정파일
+## Oracle 11g Release 2 설치
+- [오라클 설치](00_설정파일/setting/ORACLE_INSTALL/README.md)
+
 ## 개발표준
 - [메소드](/00_설정파일/convention_hcg/Code_Convention/elaborate/method.md)
 - [변수](/00_설정파일/convention_hcg/Code_Convention/elaborate/variable.md)
