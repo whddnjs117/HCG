@@ -246,3 +246,8 @@ WHERE T1.C_CD = :C_CD
   AND (:TOP_SIZE IS NULL OR T1.TOP_SIZE = :TOP_SIZE)
   AND (:BOT_SIZE IS NULL OR T1.BOT_SIZE = :BOT_SIZE)
 ;
+
+
+D:\bak
+
+exp  userid=HUNELSTANDARD/HUNEL!STANDARD  file='D:\bak\full.dmp' full=y

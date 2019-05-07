@@ -1,8 +1,9 @@
 SELECT *
 FROM ALL_COL_COMMENTS
-WHERE TABLE_NAME = 'PR3510';
+WHERE TABLE_NAME = 'PA1020';
 SELECT *
-FROM PR3510;
+FROM PR3010;
+
 ------------------------------------------------------------------------------------------------------------------------
 DROP TABLE PR3010 CASCADE CONSTRAINTS PURGE;
 CREATE TABLE PR3010
@@ -103,7 +104,7 @@ CREATE TABLE PR3510
 (
     C_CD        VARCHAR2(20)                NOT NULL,
     UNIF_CD     VARCHAR2(20)                NOT NULL,
-    FILE_NO     VARCHAR2(60)                NOT NULL,
+    FILE_NO     VARCHAR2(60),
     FILE_TYPE   VARCHAR2(20)                NOT NULL,
     INS_USER_ID VARCHAR2(20)                NULL,
     MOD_USER_ID VARCHAR2(20)                NULL,
@@ -169,11 +170,17 @@ COMMENT ON COLUMN PR3210.MOD_GYMDHMS IS '수정일시_현지';
 DROP TABLE PR3210_TMP CASCADE CONSTRAINTS PURGE;
 CREATE GLOBAL TEMPORARY TABLE PR3210_TMP
 (
-    C_CD         VARCHAR2(20) NOT NULL,
-    EMP_ID       VARCHAR2(60) NOT NULL,
+    C_CD         VARCHAR2(20)                NOT NULL,
+    EMP_ID       VARCHAR2(60)                NOT NULL,
     GIV_STD_ID   VARCHAR2(60),
     ORG_ID       VARCHAR2(60),
     EMP_GRADE_CD VARCHAR2(60),
+    INS_USER_ID  VARCHAR2(20)                NULL,
+    MOD_USER_ID  VARCHAR2(20)                NULL,
+    INS_GYMDHMS  TIMESTAMP(6) WITH TIME ZONE NULL,
+    INS_YMDHMS   TIMESTAMP(6)                NULL,
+    MOD_YMDHMS   TIMESTAMP(6)                NULL,
+    MOD_GYMDHMS  TIMESTAMP(6) WITH TIME ZONE NULL,
     CONSTRAINT PK_I_PR3210_TMP
         PRIMARY KEY (C_CD, EMP_ID, GIV_STD_ID)
 )
@@ -186,6 +193,12 @@ COMMENT ON COLUMN PR3210_TMP.EMP_ID IS '사번';
 COMMENT ON COLUMN PR3210_TMP.GIV_STD_ID IS '지급회차ID';
 COMMENT ON COLUMN PR3210_TMP.ORG_ID IS '조직코드';
 COMMENT ON COLUMN PR3210_TMP.EMP_GRADE_CD IS '직급코드';
+COMMENT ON COLUMN PR3210_TMP.INS_USER_ID IS '입력자ID';
+COMMENT ON COLUMN PR3210_TMP.MOD_USER_ID IS '작업자ID';
+COMMENT ON COLUMN PR3210_TMP.INS_GYMDHMS IS '입력일시_현지';
+COMMENT ON COLUMN PR3210_TMP.INS_YMDHMS IS '입력일시';
+COMMENT ON COLUMN PR3210_TMP.MOD_YMDHMS IS '수정일시';
+COMMENT ON COLUMN PR3210_TMP.MOD_GYMDHMS IS '수정일시_현지';
 ------------------------------------------------------------------------------------------------------------------------
 DROP TABLE PR3310 CASCADE CONSTRAINTS PURGE;
 CREATE TABLE PR3310
@@ -206,7 +219,7 @@ CREATE TABLE PR3310
     MOD_GYMDHMS TIMESTAMP(6) WITH TIME ZONE,
 
     CONSTRAINT PK_I_PR3310
-        PRIMARY KEY (C_CD, EMP_ID, APPL_ID, GIV_STD_ID),
+        PRIMARY KEY (C_CD, APPL_ID, SEQ_NO),
     CONSTRAINT NI_SY7010_PR3310
         FOREIGN KEY (C_CD, APPL_ID) REFERENCES SY7010 ON DELETE CASCADE,
     CONSTRAINT NI_PR3210_PR3310
@@ -280,14 +293,14 @@ COMMENT ON COLUMN PR3410.MOD_GYMDHMS IS '수정일시_현지';
 DROP PROCEDURE P_PR_UNIF_TARG_CHEK;
 -- CALL P_PR_UNIF_TARG_CHEK('10', '123', '', '', '', '', '');
 -----------------------------------------------------------------------------
-CREATE PROCEDURE "P_PR_UNIF_TARG_CHEK"(I_C_CD VARCHAR2,
-                                       I_GIV_ID VARCHAR2,
-                                       I_ORG_ID VARCHAR2,
-                                       I_EMP_GRADE_CD VARCHAR2,
-                                       I_GENDER_TYPE VARCHAR2,
-                                       I_BATCH_TYPE VARCHAR2,
-                                       I_ONLY_CHECK VARCHAR2,
-                                       I_MOD_USER_ID VARCHAR2,
+CREATE PROCEDURE "P_PR_UNIF_TARG_CHEK"(I_C_CD IN VARCHAR2,
+                                       I_GIV_ID IN VARCHAR2,
+                                       I_ORG_ID IN VARCHAR2,
+                                       I_EMP_GRADE_CD IN VARCHAR2,
+                                       I_GENDER_TYPE IN VARCHAR2,
+                                       I_BATCH_TYPE IN VARCHAR2,
+                                       I_ONLY_CHECK IN VARCHAR2,
+                                       I_MOD_USER_ID IN VARCHAR2,
                                        O_ERRORCODE OUT VARCHAR2, -- 처리코드
                                        O_ERRORMESG OUT VARCHAR2) -- 처리내역
 IS
@@ -305,12 +318,24 @@ BEGIN
                                 EMP_ID,
                                 GIV_STD_ID,
                                 ORG_ID,
-                                EMP_GRADE_CD)
+                                EMP_GRADE_CD,
+                                INS_USER_ID,
+                                INS_YMDHMS,
+                                MOD_USER_ID,
+                                MOD_YMDHMS,
+                                INS_GYMDHMS,
+                                MOD_GYMDHMS)
         SELECT T1.C_CD,
                T1.EMP_ID,
                I_GIV_ID,
                T2.ORG_ID,
-               T2.EMP_GRADE_CD
+               T2.EMP_GRADE_CD,
+               I_MOD_USER_ID,
+               SYSTIMESTAMP,
+               I_MOD_USER_ID,
+               SYSTIMESTAMP,
+               CURRENT_TIMESTAMP,
+               CURRENT_TIMESTAMP
         FROM PA1010 T1,
              PA1020 T2
         WHERE T1.C_CD = I_C_CD
@@ -351,12 +376,24 @@ BEGIN
                                 EMP_ID,
                                 GIV_STD_ID,
                                 ORG_ID,
-                                EMP_GRADE_CD)
+                                EMP_GRADE_CD,
+                                INS_USER_ID,
+                                INS_YMDHMS,
+                                MOD_USER_ID,
+                                MOD_YMDHMS,
+                                INS_GYMDHMS,
+                                MOD_GYMDHMS)
         SELECT T1.C_CD,
                T1.EMP_ID,
                I_GIV_ID,
                T2.ORG_ID,
-               T2.EMP_GRADE_CD
+               T2.EMP_GRADE_CD,
+               I_MOD_USER_ID,
+               SYSTIMESTAMP,
+               I_MOD_USER_ID,
+               SYSTIMESTAMP,
+               CURRENT_TIMESTAMP,
+               CURRENT_TIMESTAMP
         FROM PA1010 T1,
              PA1020 T2
         WHERE T1.C_CD = I_C_CD
@@ -433,7 +470,13 @@ BEGIN
                    C.EMP_ID,
                    C.GIV_STD_ID,
                    C.ORG_ID,
-                   C.EMP_GRADE_CD
+                   C.EMP_GRADE_CD,
+                   C.INS_USER_ID,
+                   C.INS_YMDHMS,
+                   C.MOD_USER_ID,
+                   C.MOD_YMDHMS,
+                   C.INS_GYMDHMS,
+                   C.MOD_GYMDHMS
             FROM PA1010 A,
                  PA1020 B,
                  PR3210_TMP C
@@ -462,12 +505,24 @@ BEGIN
                     T1.EMP_ID,
                     T1.GIV_STD_ID,
                     T1.ORG_ID,
-                    T1.EMP_GRADE_CD)
+                    T1.EMP_GRADE_CD,
+                    T1.INS_USER_ID,
+                    T1.INS_YMDHMS,
+                    T1.MOD_USER_ID,
+                    T1.MOD_YMDHMS,
+                    T1.INS_GYMDHMS,
+                    T1.MOD_GYMDHMS)
             VALUES (T2.C_CD,
                     T2.EMP_ID,
                     T2.GIV_STD_ID,
                     T2.ORG_ID,
-                    T2.EMP_GRADE_CD);
+                    T2.EMP_GRADE_CD,
+                    T2.INS_USER_ID,
+                    T2.INS_YMDHMS,
+                    T2.MOD_USER_ID,
+                    T2.MOD_YMDHMS,
+                    T2.INS_GYMDHMS,
+                    T2.MOD_GYMDHMS);
 
         DBMS_OUTPUT.PUT_LINE('PR3210 테이블에 값 추가 완료');
 
@@ -480,3 +535,9 @@ EXCEPTION
         O_ERRORCODE := SQLCODE;
 
 END;
+
+DELETE FROM SY7010 WHERE APPL_TYPE = '333';
+SELECT * FROM SY7010 WHERE APPL_TYPE = '333';
+
+SELECT * FROM PR3310;
+SELECT * FROM PR3210 WHERE EMP_ID = '02096' AND GIV_STD_ID = '20190415-cST';
