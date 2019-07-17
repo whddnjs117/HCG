@@ -1,8 +1,3 @@
-<div align=center>
-
-![forever](hcgnine/HCG.PNG)
-
-</div>
 
 # hunel 개발자를 위한 정보 공유 저장소
 <div align=center>
@@ -10,6 +5,34 @@
 [![license](https://img.shields.io/badge/license-HCG-red.svg)](http://www.e-hcg.com/)
 [![author](https://img.shields.io/badge/author-Inseong--So-orange.svg)](https://github.com/InSeong-So)
 [![people](https://img.shields.io/badge/people-dhjeon%2C%20dykim%2C%20gepark%2C%20isso%2C%20iykim%2C%20jykim%2C%20kioong%2C%20syoh%2C%20wshan-lightgrey.svg)](https://github.com/orgs/hcgnine/people)
+
+</div>
+
+<hr>
+<br>
+
+# [★★★★★개발 간 필요한 함수, 코드 정리](개발정리.md) << 클릭하시오!!
+
+<br>
+
+- [0. 개발환경구축파일](#0-개발환경구축파일)
+- [1. 개발환경구축](#1-개발환경구축)
+    - [Network Setting](#network-setting)
+    - [Database](#database)
+    - [IDE](#ide)
+    - [Server](#server)
+    - [ETC](#etc)
+- [2. 교육](#2-교육)
+    - [업무교육](#업무교육)
+    - [개발교육](#개발교육)
+- [3. 에러](#3-에러)
+
+<br>
+<hr>
+
+<div align=center>
+
+![forever](hcgnine/HCG.PNG)
 
 </div>
 
