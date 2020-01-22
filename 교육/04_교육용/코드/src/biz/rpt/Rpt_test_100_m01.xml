@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='utf-8'?>
+<SQLResource version='1'>
+
+<query name='search01'><![CDATA[
+SELECT T1.C_CD
+      ,T1.APPL_ID
+      ,T1.EMP_ID
+      ,T1.RPT_STD_CD
+      ,T1.RPT_YMD
+      ,T1.RPT_CNT
+      ,T1.RPT_BRAND
+      ,T1.RPT_SIZE
+      ,T1.NOTE
+      ,T2.APPL_STAT_CD
+  FROM RPT0010 T1
+      ,SY7010 T2
+ WHERE 1 = 1
+       AND T1.C_CD = :C_CD
+       AND T2.C_CD = T1.C_CD
+       AND T1.APPL_ID = :APPL_ID
+       AND T2.APPL_ID = T1.APPL_ID
+]]></query>
+
+<query name='onApplComplete'><![CDATA[
+INSERT INTO RPT0020
+            (
+                C_CD
+               ,DATA_ID
+               ,APPL_ID
+               ,EMP_ID
+               ,RPT_YMD
+               ,RPT_CNT
+               ,RPT_BRAND
+               ,RPT_SIZE
+               ,RPT_YN
+               ,RPT_STD_CD
+               ,IN_TYPE
+               ,APPL_YMD
+               ,NOTE
+               ,INS_USER_ID
+               ,INS_YMDHMS
+               ,INS_GYMDHMS
+               ,MOD_USER_ID
+               ,MOD_YMDHMS
+               ,MOD_GYMDHMS
+            )
+    SELECT T1.C_CD
+          , :DATA_ID
+          ,T1.APPL_ID
+          ,T2.TRG_EMP_ID
+          ,T1.RPT_YMD
+          ,T1.RPT_CNT
+          ,T1.RPT_BRAND
+          ,T1.RPT_SIZE
+          ,'N'
+          ,T1.RPT_STD_CD
+          ,'20'
+          ,T1.APPL_YMD
+          ,T1.NOTE
+          , :MOD_USER_ID
+          ,SYSDATE
+          ,CURRENT_TIMESTAMP
+          , :MOD_USER_ID
+          ,SYSDATE
+          ,CURRENT_TIMESTAMP
+      FROM RPT0010 T1
+          ,SY7010 T2
+     WHERE T1.C_CD = :C_CD
+           AND T1.APPL_ID = :APPL_ID
+           AND T1.C_CD = T2.C_CD
+           AND T1.APPL_ID = T2.APPL_ID
+]]></query>
+
+<query name='changeTRG'><![CDATA[
+SELECT T1.C_CD
+     , T1.EMP_ID
+     , T1.EMP_NM
+     , T2.ORG_ID
+     , F_GET_GLOBAL_UP_ORGID_NM (T3.C_CD, T3.PAR_OBJ_ID,'NM',TO_CHAR(SYSDATE,'YYYYMMDD'),:LANG_TYPE)
+       ||' / '||F_GET_GLOBAL_UP_ORGID_NM(T2.C_CD,T2.ORG_ID, 'NM',TO_CHAR(SYSDATE, 'YYYYMMDD'), :LANG_TYPE)
+       ||' / '||F_GET_GLOBAL_OBJNM(T2.C_CD, 'O', T2.ORG_ID, TO_CHAR(SYSDATE, 'YYYYMMDD'), :LANG_TYPE) ORG_NM
+     , T2.EMP_GRADE_CD
+     , F_GET_GLOBAL_CDNM(T2.C_CD, '/SY03', T2.EMP_GRADE_CD, :LANG_TYPE) EMP_GRADE_NM
+     , T2.DUTY_CD
+     , F_GET_GLOBAL_CDNM(T2.C_CD, '/SY05', T2.DUTY_CD, :LANG_TYPE) DUTY_NM
+     , T1.ENTER_YMD     
+  FROM VR_PA1010 T1
+       ,PA1020 T2
+       ,SY3020 T3
+ WHERE 1=1
+   AND T1.C_CD          = :C_CD
+   AND T1.EMP_ID        = :EMP_ID
+   AND T2.C_CD          = T1.C_CD
+   AND T2.EMP_ID        = T1.EMP_ID
+   AND T2.LAST_YN       = 'Y'
+   AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN T2.STA_YMD AND T2.END_YMD
+   AND T3.C_CD          = T2.C_CD
+   AND T3.OBJ_TYPE      = 'O'
+   AND T3.OBJ_ID        = T2.ORG_ID
+   AND TO_CHAR(SYSDATE,'YYYYMMDD') BETWEEN T3.STA_YMD AND T3.END_YMD
+]]></query>
+
+</SQLResource>

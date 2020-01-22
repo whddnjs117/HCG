@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<SQLResource version='1'>
+
+<query name='search01'><![CDATA[
+SELECT T1.C_CD
+      ,T1.EMP_ID
+      ,F_GET_EMPNM(T1.C_CD, T1.EMP_ID) EMP_NM
+      ,T1.ORG_ID
+      ,F_GET_GLOBAL_OBJNM(T1.C_CD, 'O', T1.ORG_ID, TO_CHAR(SYSDATE, 'YYYYMMDD'), :LANG_TYPE) ORG_NM
+      ,T1.EMP_GRADE_CD
+      ,F_GET_GLOBAL_CDNM(T1.C_CD, '/SY03', T1.EMP_GRADE_CD, :LANG_TYPE) EMP_GRADE_NM
+      ,T1.DUTY_CD
+      ,F_GET_GLOBAL_CDNM(T1.C_CD, '/SY05', T1.DUTY_CD, :LANG_TYPE) DUTY_NM
+      ,T2.IN_TYPE
+      ,T2.APPL_YMD
+      ,T2.RPT_YN
+      ,T2.RPT_YMD
+      ,T2.RPT_STD_CD
+      ,T2.RPT_BRAND
+      ,T2.RPT_SIZE
+      ,T2.RPT_CNT
+      ,T2.NOTE
+      ,T2.DATA_ID
+      ,T2.APPL_ID
+  FROM PA1020 T1
+      ,RPT0020 T2
+ WHERE 1 = 1
+       AND T1.C_CD = :C_CD
+       AND TO_CHAR(SYSDATE, 'YYYYMMDD') BETWEEN T1.STA_YMD AND T1.END_YMD
+       AND T1.LAST_YN = 'Y'
+       AND T2.C_CD = T1.C_CD
+       AND T2.EMP_ID = T1.EMP_ID
+       AND (:RPT_YN IS NULL OR T2.RPT_YN = :RPT_YN)
+       @BLOCK@ 
+]]></query>
+
+</SQLResource>
