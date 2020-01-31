@@ -46,227 +46,251 @@
 
 # 모바일 개발 표준
 ## 기본 코드(포맷) 소개
-```jsp
-<%@page language="java" contentType="text/html; charset=utf-8" %>
-<%@include file="/common/jsp/header.jsp"%>
-<html>
-<head>
-<title>:: HCG hunel Mobile v.3.0 ::</title>
-<%@include file="/common/jsp/commonResource.jsp"%>
-<script>
-var vmMaster;
+- 코드
+  ```jsp
+  <%@page language="java" contentType="text/html; charset=utf-8" %>
+  <%@include file="/common/jsp/header.jsp"%>
+  <%--
+  Program Name  : 파일이름.jsp
+  Description   : 프로그램명
+  Author        : 작성자
+  History       : yyyy-mm-dd 신규개발
+                  yyyy-mm-dd 수정
+  --%>
+  <html>
+  <head>
+  <title>:: HCG hunel Mobile v.3.0 ::</title>
+  <%@include file="/common/jsp/commonResource.jsp"%>
+  <script>
+  var vmMaster;
 
-function LoadPage()
-{
-  initVueApp();
-}
+  function LoadPage()
+  {
+    initVueApp();
+  }
 
-function initVueApp()
-{
-  var pageVueParam = {
+  function initVueApp()
+  {
+    var pageVueParam = {
 
-    // 각 페이지에서 개발자가 작성한 Vue 옵션
+      // 각 페이지에서 개발자가 작성할 Vue 옵션
 
-  }; //common.js의 baseVueParam과 merge됨
+    };
 
-  vmMaster = HCG.initVue(pageVueParam);
-}
-</script>
-</head>
-<body class="vh100">
-<%@include file="/main/jsp/menu.jsp"%>
-<div id="vmMaster" class="container-fluid pt50">
-<v-app class="h-app">
-<v-form ref="f1" name="f1" method="post" onsubmit="return false">
+    //common.js의 baseVueParam과 merge 시키는 함수
+    vmMaster = HCG.initVue(pageVueParam);
+  }
+  </script>
+  </head>
+  <body class="vh100">
+  <%@include file="/main/jsp/menu.jsp"%>
+  <div id="vmMaster" class="container-fluid pt50">
+  <v-app class="h-app">
+  <v-form ref="f1" name="f1" method="post" onsubmit="return false">
 
-<!-- Freeform 등 페이지 디자인 -->
+  <!-- Freeform 등 페이지 디자인 -->
 
-</v-form>
-</v-app>
-</div>
-</body>
-</html>
-```
-
-<hr>
-<br>
-
-## 인스턴스 생성
-> Vue 앱은 Vue 인스턴스를 생성해야 사용할 수 있음
-Vue 인스턴스는 new Vue()로 만드는 것이 기본 방법이지만 미리 만들어 놓은  baseVueParam과 개발자가 페이지에서 만들어 놓은 pageVueParam을 merge하여 개발의 편의성을 보장하기 위해 HCG.initVue를 통해 인스턴스를 만듭니다.
-
-```js
-var pageVueParam = 
-{
-
-    // 각 페이지에서 개발자가 작성한 Vue 옵션
-
-};
-
-
-var vmMaster = HCG.initVue( pageVueParam );
-// common.js의 baseVueParam과 pageVueParam을 merge하여 공통함수를 매번 정의하지 않아도 됨
-```
+  </v-form>
+  </v-app>
+  </div>
+  </body>
+  </html>
+  ```
 
 <hr>
 <br>
 
 ## 페이지별 Vue 옵션 작성
-작성되는 페이지에는 반드시 Vue 인스턴스를 만들기 위한 옵션을 작성해야 하며 pageVueParam 이란 이름으로 작성합니다.
-이렇게 작성된 Vue 인스턴스 생성을 위한 옵션은 추가적으로 common.js의 baseVueParam 객체와 merge 되어 Vue 인스턴스를 생성합니다.
+> Vue 앱은 Vue 인스턴스를 생성해야 사용할 수 있음
+> - 작성하는 페이지에는 반드시 Vue 인스턴스를 만들기 위한 옵션을 정의해야 하며 `pageVueParam`이란 이름으로 작성
+> - 작성된 Vue 옵션은 `HCG.initVue(pageVueParam)`에 의해 common.js의 `baseVueParam` 객체와 merge 되어 Vue 인스턴스 생성
 
-Merge된 옵션으로 Vue 인스턴스를 작성하는 방법은 HCG.initVue( pageVueParam)을 이용하는 것입니다.
-
-```js
-var pageVueParam = 
-{ 
-    el:"#vmMaster"  //Vue 인스턴스를 만들 컨테이너 ( body태그는 안됨 )
+- 예시
+  ```js
+  var pageVueParam = 
+  { 
+    // 각 페이지에서 개발자가 작성할 Vue 옵션
+    
+    // Vue 인스턴스를 만들 컨테이너 (body 태그는 불가)
+    el:"#vmMaster"
+    // 페이지에서 사용할 data set
     ,data :
     {
-       dsClass : "<com:otp value="Biz클래스명"/>" //Biz Class명 ( OTP로 1회용 암호화  )
-      ,dsMethod : ""     //Biz Method명 ( 로직에 따라 변경되므로 스크립트로 지정 )
-      ,resultSet : {}    //조회된 결과
-      ,combo : {}        //combo등에 사용될 Prepared Data
-      ,condition: { }    //조회조건에 사용될 파라미터
-      ,visible : {}      //팝업이나 버튼 등의 show를 조절할 변수
+      // Biz Class명 (OTP로 1회용 암호화)
+      dsClass : "<com:otp value="Biz클래스명"/>"
+      // Biz Method명 (로직에 따라 변경되므로 스크립트로 지정)
+      ,dsMethod : ""
+      // 조회된 결과
+      ,resultSet : {}
+      // combo등에 사용될 Prepared Data
+      ,combo : {}
+      // 조회 조건에 사용될 파라미터
+      ,condition: { }
+      // 팝업이나 버튼 등의 show를 조절할 변수
+      ,visible : {}
     }
     ,methods : 
     {
-      v_함수명: function() //뷰 전용 함수는 함수명 앞에 v_를 붙여 일반 함수와 구분함
+      //뷰 전용 함수는 함수명 앞에 v_를 붙여 일반 함수와 구분
+      v_함수명: function()
       {
-        
+        // 각 함수별 기능 정의
       }
+      // 생략
     }
-};
+    // 생략
+  };
 
+  // common.js의 baseVueParam과 pageVueParam을 merge하므로 공통함수를 매번 정의할 필요 없음
+  var vmMaster = HCG.initVue( pageVueParam );
+  ```
 
-var vmMaster = HCG.initVue( pageVueParam );
-```
-
-- 공통 옵션인 baseVueParam을 수정하면 모든 Vue 인스턴스에 baseVueParam의 옵션이 적용되게 할 수 있습니다.
-- 다만 baseVueParam과  pageVueParam이 같은 내용을 동시에 정의 하면 pageVueParam의 내용이 적용됩니다.
-
+- common.js의 `baseVueParam`을 수정하면 모든 Vue 인스턴스에 baseVueParam의 옵션이 적용
+  - 단, baseVueParam과 pageVueParam에서 정의하는 이름이 같다면 `pageVueParam`의 내용이 적용
+  
+  - 적용우선순위 : `baseVueParam < pageVueParam`
 
 <hr>
 <br>
 
-## 다국어 출력
-- 다국어 프로퍼티에 설정된 다국어는 기존과 같이 Label 또는 Message로 표시
-- 단, 뷰와 일반적인 스크립트는 함수명이 다르므로 사용에 주의
-- 휴넬과의 호환을 위해 ajaxMsg 등의 함수는 같은 이름으로 구현 되어 있지만 ajax로 동작하지는 않습니다.
+## 다국어 프로퍼티에 정의한 데이터 출력
+> 다국어 프로퍼티에 설정된 다국어는 기존과 같이 Label과 Message로 표시
+> - 단, 뷰 옵션 선언부와 기존 자바 스크립트 선언부의 함수명이 다르므로 사용에 주의
+> - hunel과의 호환을 위해 ajaxMsg 등의 함수는 같은 이름으로 구현 되어 있으나 ajax로 동작하지 않음
 
-- Label 다국어
+- Label
   ```js
-  v_getLabel("fam","가족");                 //뷰함수로 이용해야 할 경우
-  HCG.getLabel("fam","가족");               //기본 script 함수로 이용해야 할 경우
-  HCG.getMultiLang("label", "fam", "가족"); //기본 script 함수로 이용해야 할 경우 ( HCG.getLabel과 동일 )
+  // 뷰 옵션 선언부에서 사용 시
+  v_getLabel("fam","가족");
+  // 기존 자바 스크립트 선언부에서 사용 시
+  HCG.getLabel("fam","가족");
+  // 기존 자바 스크립트 선언부에서 사용 시2 ( HCG.getLabel과 동일 )
+  HCG.getMultiLang("label", "fam", "가족");
   ```
 
-- Message 다국어
+- Message
   ```js
-  v_getMessage("MSG_ALERT_NOT_FOUND","조회된 데이터가 없습니다.")                 //뷰함수로 이용해야 할 경우
-  HCG.getMessage(" MSG_ALERT_NOT_FOUND ","조회된 데이터가 없습니다.");            //기본 script 함수로 이용해야 할 경우
-  HCG.getMultiLang("message", " MSG_ALERT_NOT_FOUND ", "조회된 데이터가 없습니다."); //HCG.getMessage와 동일
-  HCG.ajaxMsg("MSG_ALERT_NOT_FOUND","조회된 데이터가 없습니다.");                    //HCG.getMessage와 동일
+  // 뷰 옵션 선언부에서 사용 시
+  v_getMessage("MSG_ALERT_NOT_FOUND","조회된 데이터가 없습니다.");
+  // 기존 자바 스크립트 선언부에서 사용 시
+  HCG.getMessage(" MSG_ALERT_NOT_FOUND ","조회된 데이터가 없습니다.");
+  // 기존 자바 스크립트 선언부에서 사용 시2 ( HCG.getMessage 동일 )
+  HCG.getMultiLang("message", " MSG_ALERT_NOT_FOUND ", "조회된 데이터가 없습니다.");
+  // 기존 자바 스크립트 선언부에서 사용 시3 ( HCG.getMessage 동일 )
+  HCG.ajaxMsg("MSG_ALERT_NOT_FOUND","조회된 데이터가 없습니다.");
   ```
 
 <hr>
 <br>
 
 ## 보이기 / 감추기 (열기 / 닫기)
-데이터의 visible 객체에는 버튼, 입력폼, 팝업 등의 보이기, 감추기 또는 열기, 닫기를 의미하는 여러 변수를 담습니다.
-버튼은 btn, 팝업은 pop, 입력폼 관련은 inp, 기타 블럭은 box의 접두사를 붙여 사용합니다
+> 데이터의 visible 객체에는 `버튼`, `입력폼`, `팝업 등의 보이기`, `감추기` 또는 `열기`, `닫기`를 의미하는 여러 변수를 저장
+> - `버튼은 btn`, `팝업은 pop`, `입력폼 관련은 inp`, `기타 블럭은 box`의 접두사를 붙임
 
-```js
-data :
-{
-  // 생략
-  ,visible :
-  {
-    btnSave : false      //버튼 show, hidden 용 변수 btn으로 시작
-    ,popInfo : false     //팝업 open, close 용 변수 pop으로 시작
-    ,inpStaYmd : false   //입력폼 show, hidden 용 변수 inp로 시작
-    ,boxArea : false     //기타 블럭 show, hidden 용 변수 box로 시작
+- 예시
+  ```js
+  var pageVueParam = 
+  { 
+    // 생략
+    ,data :
+    {
+      // 생략
+      ,visible :
+      {
+        // 버튼 show, hidden 용 변수 btn으로 시작
+        btnSave : false
+        // 팝업 open, close 용 변수 pop으로 시작
+        ,popInfo : false
+        // 입력폼 show, hidden 용 변수 inp로 시작
+        ,inpStaYmd : false
+        // 기타 블럭 show, hidden 용 변수 box로 시작
+        ,boxArea : false
+      }
+      // 생략
+    }
+    // 생략
   }
-  // 생략
-}
-```
+  ```
 
-동적으로 보이기/감추기를 변경하려면 Vue.set을 이용하여 visible 변수를 변경합니다
+- 동적으로 보이기 / 감추기를 변경하려면` Vue.set`을 사용하여 `visible` 변수 변경
+  ```js
+  // 뷰 옵션 선언부에서 사용할 때에는 this를 사용
+  Vue.set( this.visible     , "btnSave", true );
+  // 기존 자바 스크립트 선언부에서 사용할 때에는 this 대신 vmMaster 등 뷰 앱을 이용
+  Vue.set( vmMaster.visible , "btnSave", true );
+  ```
 
-```js
-Vue.set( this.visible     , "btnSave", true ); //뷰 함수 내부에서 사용할 때에는 this를 사용할 수 있음
-Vue.set( vmMaster.visible , "btnSave", true ); //일반 함수에서 사용할 때에는 this 대신 vmMaster 등 뷰앱을 이용해야 함
-```
-
-Visible 변수는 v-show 또는 v-if로 연결하여 사용합니다.
-
-```html
-<div id="h-detail-layer" class="h-detail-layer" v-show="visible.boxArea"><!-- 코드 작성 --></div>
-<div id="h-detail-layer" class="h-detail-layer" v-if="visible.boxArea"><!-- 코드 작성 --></div>
-```
+- Visible 변수는 html 태그의 `v-show` 또는 `v-if` 디렉티브를 선언하여 사용
+  ```html
+  <div id="h-detail-layer" class="h-detail-layer" v-show="visible.boxArea"><!-- 코드 작성 --></div>
+  <div id="h-detail-layer" class="h-detail-layer" v-if="visible.boxArea"><!-- 코드 작성 --></div>
+  ```
 
 <hr>
 <br>
 
 ## Combo 생성용 데이터 준비 및 바인드
-> PreparedData로 준비된 데이터는 combo 객체에 담습니다. cb 접두사를 붙이고 뒤에 해당 인덱스 코드나 구분할 수 있는 이름을 붙여 사용합니다.
+> PreparedData로 준비된 데이터는 `combo 객체`에 선언
+> - `cb` 접두사를 붙이고 뒤에 해당 `인덱스 코드`나 `구분할 수 있는 이름`을 붙여 사용
 
-```js
-data : 
-{
-   // 생략
-   ,combo : 
-   {
-      cbSY03  : HCG.setCombo(<%=hmPreparedData.get("SY03")%>)
-     ,cbSY04  : HCG.setCombo(<%=hmPreparedData.get("SY04")%>)
-     ,cbTAM_CD : HCG.setCombo(<%=hmPreparedData.get("TAM_CD")%>)
-   }
-   // 생략
-}
+- 예시
+  ```js
+  var pageVueParam = 
+  {
+    // 생략
+    ,data :
+    {
+      // 생략
+      ,combo : 
+      {
+        cbSY03  : HCG.setCombo(<%=hmPreparedData.get("SY03")%>)
+        ,cbSY04  : HCG.setCombo(<%=hmPreparedData.get("SY04")%>)
+        ,cbTAM_CD : HCG.setCombo(<%=hmPreparedData.get("TAM_CD")%>)
+      }
+      // 생략
+    }
+    // 생략
+  }
+  ```
 
-```
-
-v-select 컴포넌트에 items 속성으로 combo 데이터를 연결합니다.
-Item-text는 명칭 컬럼, item-value는 코드컬럼을 설정할 수 있습니다.
-디자인 적용을 위해 
-<v-fade-transition slot=＂append＂>
-  <i class=＂icon-select_arrow＂></i>
-</v-fade-transition>
-를 함께 작성합니다.
-
-```html
-<v-select outline :items="combo.cbSY04" class="h-combo" v-model="뷰모델" ref="명칭" item-text="CD_NM" item-value="CD" >
-  <v-fade-transition slot="append">
-    <i class="icon-select_arrow"></i>
-  </v-fade-transition>
-</v-select>
-```
+- `v-select 컴포넌트`에 `items 속성`으로 `combo 데이터`를 연결
+  - `item-text`는 `명칭 컬럼`, `item-value`는 `코드 컬럼`을 설정
+    ```html
+    <v-select outline :items="combo.cbSY04" class="h-combo" v-model="뷰모델" ref="명칭" item-text="CD_NM" item-value="CD" >
+      <!-- // 디자인 적용을 위해 함께 작성하는 부분 -->
+      <v-fade-transition slot="append">
+        <i class="icon-select_arrow"></i>
+      </v-fade-transition>
+      <!-- 디자인 적용을 위해 함께 작성하는 부분 // -->
+    </v-select>
+    ```
 
 <hr>
 <br>
 
 ## 데이터 조회
-pageVueParam에 사용할 로직이 있는 class명을 dsClass로, method명을 dsMethod로 설정하고 (OTP 태그 사용) 조회조건으로 서버에 넘겨야 하는 것들은 condition 객체에 넣어둡니다.
-조회하여 얻은 결과는 resultSet 객체의 메소드명 객체에 담습니다.
+> pageVueParam과 매핑시킬 class명을 `dsClass`로, method명을 `dsMethod`로 설정 *(OTP 태그 필수)*
+> - 조회 조건으로 `서버에 넘겨야 하는 것(파라미터)들`은 `condition 객체`에 선언
+> - 조회 결과는 resultSet 객체의 각 `method명 객체`에 저장
 
-```js
-var pageVueParam = 
-{ 
+- 예시
+  ```js
+  var pageVueParam = 
+  { 
     // 생략
     ,data :
     {
-       dsClass : "<com:otp value="Biz클래스명"/>"
+      dsClass : "<com:otp value="Biz클래스명"/>"
       ,dsMethod : ""
       // 생략
       ,condition: 
       {
-         S_EMP_ID : ""
+        S_EMP_ID : ""
         ,S_EMP_GRADE_CD : "" 
       }
       ,resultSet:
       {
-         search01 : []
+        search01 : []
       }
       // 생략
     }
@@ -274,58 +298,65 @@ var pageVueParam =
     {
       v_search01: function()
       {
-         search01();
+          search01();
       }
+      // 생략
     }
-};
+    // 생략
+  };
 
-function search01()
-{
-  if( !vmMaster.v_checkForm("f1") )
+  function search01()
   {
-    return false;
+    if( !vmMaster.v_checkForm("f1") )
+    {
+      return false;
+    }
+
+    Vue.set(vmMaster, "dsMethod", "<com:otp value="search01"/>");
+    Vue.set(vmMaster.condition, “S_EMP_ID”, “1801001”);
+    Vue.set(vmMaster.condition, “S_EMP_GRADE_CD”, “A001”);
+
+    HCG.ajaxRequestJson( vmMaster , function( response )
+    {
+      if(!HCG.chkResponse(response)) return;
+      if(HCG.isArray(response.Data))
+      {
+        Vue.set(vmMaster.resultSet, "search01", response.Data);
+      }
+      else
+      {
+        Vue.set(vmMaster.resultSet, "search01", []);
+      }
+    });
   }
+  ```
 
-  Vue.set(vmMaster, "dsMethod", "<com:otp value="search01"/>");
-  Vue.set(vmMaster.condition, “S_EMP_ID”, “1801001”);
-  Vue.set(vmMaster.condition, “S_EMP_GRADE_CD”, “A001”);
+<hr>
+<br>
 
-  HCG.ajaxRequestJson( vmMaster , function( response )
-  {
-    if(!HCG.chkResponse(response)) return;
-    if(HCG.isArray(response.Data))
-    {
-      Vue.set(vmMaster.resultSet, "search01", response.Data);
-    }
-    else
-    {
-      Vue.set(vmMaster.resultSet, "search01", []);
-    }
-  });
-}
-```
+## 조회 조건 데이터의 컴포넌트 연결(v-model)
+> `조회 조건(파라미터)`으로 사용되는 데이터는 반드시 `condition 객체`에 선언
+> - 다른 데이터와 구분하기 위해 `S_ 접두사`를 붙여 작명 *(S_DB컬럼명)*
+> - 컴포넌트와는 `v-model 디렉티브`를 이용하여 연결 *(v-model="condition.S_EMP_ID")*
 
-## 조회조건 뷰모델과 컴포넌트의 연결
-조회조건으로 사용되는 데이터는 condition 객체에 담아두어야 하며 다른 데이터와 구분하기 위해 S_ 접두사를 이용하여 작명합니다.(S_ + DB컬럼명)
-컴포넌트와는 v-model 속성을 이용하여 연결합니다.
-
-```js
-var pageVueParam = 
-{ 
+- 예시
+  ```js
+  var pageVueParam = 
+  { 
     // 생략
     ,data :
     {
-       dsClass : "<com:otp value="Biz클래스명"/>"
+      dsClass : "<com:otp value="Biz클래스명"/>"
       ,dsMethod : ""
       // 생략
       ,condition: 
       {
-         S_EMP_ID : ""
+        S_EMP_ID : ""
         ,S_EMP_GRADE_CD : "" 
       }
       ,resultSet:
       {
-         search01 : []
+        search01 : []
       }
       // 생략
     }
@@ -333,72 +364,64 @@ var pageVueParam =
     {
       v_search01: function()
       {
-         search01();
+        search01();
       }
+      // 생략
     }
-};
-```
+    // 생략
+  };
+  ```
 
-```html
-<v-text-field v-model="condition.S_EMP_ID"></v-text-field>
-<v-select v-model="condition.S_EMP_GRADE_CD"></v-select>
-```
+  ```html
+  <v-text-field v-model="condition.S_EMP_ID"></v-text-field>
+  <v-select v-model="condition.S_EMP_GRADE_CD"></v-select>
+  ```
 
 <hr>
 <br>
 
 ## 리스트 데이터 표시
-resultSet에 배열로 담겨 조회된 내용을 화면에 표시 하기 위해선 v-for를 이용하여 화면에 표시합니다.
-v-for 루프안에서 배열을 구성하는 객체를 의미하는 item과 index를 사용할 수 있습니다.
+> `resultSet에 배열로 담겨 조회된 내용`은 `v-for 디렉티브`로 표시
+> - v-for 루프안에서 `배열을 구성하는 객체, item`과 `배열의 순서, index`를 사용하여 출력
+> - 명칭을 변경해도 상관 없으나 바꿀 이유가 없으면 통일할 것
 
-```html
-<ul>
-  <li v-for="(item, index) in resultSet.search01"> 
-    순번 : {{index}}, 성명 : {{item.EMP_NM}} , 사번 : {{item.EMP_ID}} 
-  </li>
-</ul>
-```
+- 예시
+  ```html
+  <ul>
+    <li v-for="(item, index) in resultSet.search01"> 
+      순번 : {{index}} , 성명 : {{item.EMP_NM}} , 사번 : {{item.EMP_ID}} 
+    </li>
+  </ul>
+  ```
 
-배열 안에 배열이 있는 2중 배열 구조의 데이터를 표시할 땐 v-for 안에 v-for를 사용해야 합니다.
-Item 안의 item은 itemD로 명명합니다. ( 동일한 item명을 사용하면 안됨 )
-
-```html
-<ul>
-  <li v-for="(item, index) in resultSet.search01"> 
+- 배열 안에 배열이 있는 2중 배열 구조는 `v-for 안에 v-for`를 사용
+  - item 안의 item은 `itemD`로 명명 *(동일한 item명을 사용 금지)*
+    ```html
     <ul>
-      <li v-for="(itemD, indexD) in item"></li>
+      <li v-for="(item, index) in resultSet.search01"> 
+        <ul>
+          <li v-for="(itemD, indexD) in item"></li>
+        </ul>
+      </li>
     </ul>
-  </li>
-</ul>
-
-```
+    ```
 
 <hr>
 <br>
 
-## 포맷 입력폼 ( h-format-field ) 컴포넌트
-포맷 입력폼 컴포넌트는 숫자 표시, 주민번호, 사업자 번호 등의 format을 설정할 수 있는 입력폼 입니다.
-단, 년월일 타입(dfDateYmd)의 경우 포맷은 적용되지만 달력을 사용할 수 없습니다.
-달력에서 선택하는 년월일 입력폼을 원할 경우는 h-date-field를 사용해야 합니다.
+## 포맷 입력폼 ( `h-format-field` ) 컴포넌트
+> 숫자 표시, 주민번호, 사업자 번호 등의 `format`을 설정할 수 있는 입력폼
+> - 년월일 타입(dfDateYmd)의 경우 포맷은 적용되나 달력을 사용할 수 없음
+> - 달력에서 선택하는 년월일 입력폼을 원할 경우는 `h-date-field`를 사용
 
-```html
-<h-format-field data-format="dfDateYy"></h-format-field>
-<h-format-field data-format="dfInteger"></h-format-field>
-<h-format-field data-format="dfInteger"></h-format-field>
-<h-format-field data-format="dfInteger"></h-format-field>
-```
+<br>
+
+<div align=center>
+
+<h3>포맷별 설명</h3>
 
 |이름|적용형태|내용|
-|dfTimeHms|##:##:##|시간분초|
-|dfTimeHm|##:##|시간분|
-|dfIdNo|######-#######|주민번호|
-|dfSaupNo|###-##-#####|사업자번호|
-|dfCardNo|####-####-####-####|카드번호|
-|dfPostNo|###-###|(구)우편번호|
-|dfCorpNo|######-#######|법인번호|
-|dfIssueNo|####-######|이슈번호|
-|dfInteger1|###|숫자|
-
+|----|--------|----|
 |dfDateYy|####|년도|
 |dfDateMm|##|월|
 |dfDateYmd|####.##.##|년월일|
@@ -414,49 +437,104 @@ Item 안의 item은 itemD로 명명합니다. ( 동일한 item명을 사용하�
 |dfPostNo|###-###|(구)우편번호|
 |dfCorpNo|######-#######|법인번호|
 |dfIssueNo|####-######|이슈번호|
-|dfNo|######|숫자|
-|dfInteger+|천단위 , 숫자|
-|dfInteger1|천단위 , 숫자|
-|dfInteger|천단위 , 숫자|
+|dfNo|######|채번용 숫자|
+|dfInteger+|천단위 ',' 숫자|
+|dfInteger1|천단위 ',' 숫자|
+|dfInteger|천단위 ',' 숫자|
 |dfFloat+|-|-|
 |dfFloat|-|-|
 |dfTel|-|-|
 
+</div>
+
+<br>
+
+- 예시
+  ```html
+  <!-- 년도 -->
+  <h-format-field data-format="dfDateYy"></h-format-field>
+  <!-- 월 -->
+  <h-format-field data-format="dfDateMm"></h-format-field>
+  <!-- 년월일 -->
+  <h-format-field data-format="dfDateYmd"></h-format-field>
+  <!-- 년월일 -->
+  <h-format-field data-format="dfDateYmd1"></h-format-field>
+  <!-- 년월 -->
+  <h-format-field data-format="dfDateYm"></h-format-field>
+  <!-- 월일 -->
+  <h-format-field data-format="dfDateMd"></h-format-field>
+  <!-- 시분초 -->
+  <h-format-field data-format="dfTimeHms"></h-format-field>
+  <!-- 시분 -->
+  <h-format-field data-format="dfTimeHm"></h-format-field>
+  <!-- 년월일시분초 -->
+  <h-format-field data-format="dfTimeYmdhms"></h-format-field>
+  <!-- 주민번호 -->
+  <h-format-field data-format="dfIdNo"></h-format-field>
+  <!-- 사업자번호 -->
+  <h-format-field data-format="dfSaupNo"></h-format-field>
+  <!-- 카드번호 -->
+  <h-format-field data-format="dfCardNo"></h-format-field>
+  <!-- (구)우편번호 -->
+  <h-format-field data-format="dfPostNo"></h-format-field>
+  <!-- 법인번호 -->
+  <h-format-field data-format="dfCorpNo"></h-format-field>
+  <!-- 이슈번호 -->
+  <h-format-field data-format="dfIssueNo"></h-format-field>
+  <!-- 채번용 숫자 -->
+  <h-format-field data-format="dfNo"></h-format-field>
+  <!-- 천단위 ',' 숫자 -->
+  <h-format-field data-format="dfInteger+"></h-format-field>
+  <!-- 천단위 ',' 숫자 -->
+  <h-format-field data-format="dfInteger1"></h-format-field>
+  <!-- 천단위 ',' 숫자 -->
+  <h-format-field data-format="dfInteger"></h-format-field>
+  <!-- -->
+  <h-format-field data-format="dfFloat+"></h-format-field>
+  <!-- -->
+  <h-format-field data-format="dfFloat"></h-format-field>
+  <!-- -->
+  <h-format-field data-format="dfTel"></h-format-field>
+  ```
+
 <hr>
 <br>
 
-## 날짜 입력폼 ( h-date-field ) 컴포넌트
-날짜 입력폼 컴포넌트는 calendar 컴포넌트와 함께 사용하여 달력 팝업을 통해 데이터를 입력 받을 수 있는 컴포넌트 입니다.
-반드시 h-calendar-dialog와 함께 사용해야 하며 h-date-field가 한 페이지에 여러개라 하여도 h-calendar-dialog는 하나만 있으면 됩니다.
+## 날짜 입력폼 ( `h-date-field` ) 컴포넌트
+> `calendar 컴포넌트`와 함께 사용하면 `달력 팝업`을 통해 데이터를 입력 받을 수 있음
+> - `반드시 h-calendar-dialog와 함께 사용`
+> - `h-date-field가 여러 개`여도 `h-calendar-dialog는 하나만` 존재하면 됨
+> - `컴포넌트 자신의 ref`와 `달력 컴포넌트의 ref`를 반드시 지정
 
-컴포넌트 자신의 ref, 달력컴포넌트의 ref를 반드시 지정해 주어야 합니다.
-
-```html
-<!-- 캘린더 컴포넌트 -->
-<h-calendar-dialog ref="calendar"></h-calendar-dialog>
-<!-- 시작일 -->
-<h-date-field calendar-ref="calendar“ ref=“STA_YMD” v-model=“formValue.STA_YMD” :rules="[rules.ymd]“></h-date-field>
-```
+- 예시
+  ```html
+  <!-- 캘린더 컴포넌트 -->
+  <h-calendar-dialog ref="calendar"></h-calendar-dialog>
+  <!-- 시작일 -->
+  <h-date-field calendar-ref="calendar“ ref=“STA_YMD” v-model=“formValue.STA_YMD” :rules="[rules.ymd]“></h-date-field>
+  ```
 
 <hr>
 <br>
 
-## 저장 데이터 뷰모델과 컴포넌트의 연결
-사용자의 입력값을 받아 저장하려는 용도로 사용되는 데이터는 formValue 객체에 담아두는것이 원칙이며 DB에서 사용되는 컬럼명과 동일하게 작명합니다.
-컴포넌트와는 v-model 속성을 이용하여 연결합니다.
+## 저장 데이터의 컴포넌트 연결
+> 사용자의 입력값을 받아 저장하는 데이터는 `formValue 객체`에 선언
+> - DB에서 사용되는 컬럼명과 `동일하게 작명`
+> - 컴포넌트와는 `v-model 디렉티브`를 이용하여 연결
 
-```js
-var pageVueParam = 
-{ 
+- 예시
+  ```js
+  var pageVueParam = 
+  { 
     // 생략
     ,data :
     {
-       dsClass : "<com:otp value="Biz클래스명"/>"
+      dsClass : "<com:otp value="Biz클래스명"/>"
       ,dsMethod : ""
       // 생략
       ,formValue: 
       {
-         EMP_ID : ""
+        EMP_ID : ""
         ,EMP_GRADE_CD : "" 
       }
       // 생략
@@ -465,113 +543,205 @@ var pageVueParam =
     {
       v_save01: function()
       {
-         save01();
+        save01();
       }
+      // 생략
     }
-};
-
-```
-```html
-<v-text-field v-model="formValue.EMP_ID"></v-text-field>
-<v-select v-model="formValue.EMP_GRADE_CD" ></v-select>
-
-```
+    // 생략
+  };
+  ```
+  ```html
+  <!-- 기본 텍스트 박스 -->
+  <v-text-field v-model="formValue.EMP_ID"></v-text-field>
+  <!-- 콤보 박스 -->
+  <v-select v-model="formValue.EMP_GRADE_CD"></v-select>
+  ```
 
 <hr>
 <br>
 
-## 폼데이터 저장하기
-pageVueParam에 사용할 로직이 있는 class명을 dsClass로, method명을 dsMethod로 설정하고 (OTP 태그 사용)
-서버에 넘겨 저장해야 하는 것들은 formValue 객체에 넣어둡니다.
-조회와 저장이 동시에 하나의 화면에 있는 경우는 저장을 위한 form과 조회를 위한 form을 따로 사용해야 합니다.
-HCG.ajaxRequestJsonProg를 사용하여 저장을 진행합니다.
+## 폼 데이터의 저장
+> pageVueParam과 매핑시킬 class명을 `dsClass`로, method명을 `dsMethod`로 설정 *(OTP 태그 필수)*
+> - `서버에 넘겨서 저장해야 하는 데이터들`은 `formValue 객체`에 선언
+> - 조회와 저장이 하나의 화면에 있는 경우 `저장을 위한 form`과 `조회를 위한 form`을 별개로 사용
+> - `HCG.ajaxRequestJsonProg` 사용
 
-```js
-function save01()
-{
-  Vue.set(vmMaster, "dsMethod", "<com:otp value='save01' />");    //method명 변경
-  if(!vmMaster.$refs["f1"].validate()) return;                    //validation 체크
-  var param = vmMaster.formValue;                                 //저장할 객체 지정
-  HCG.ajaxRequestJsonProg(vmMaster.dsClass, vmMaster.dsMethod, param, function( response )
+- 예시
+  ```js
+  function save01()
   {
-    if(!HCG.chkResponse(response)) return;
-    search01();
-  });
-}
-```
+    // method명 변경
+    Vue.set(vmMaster, "dsMethod", "<com:otp value='save01' />");
+    // validation 체크
+    if(!vmMaster.$refs["f1"].validate()) return;
+    // 저장할 객체 지정
+    var param = vmMaster.formValue;
+    HCG.ajaxRequestJsonProg(vmMaster.dsClass, vmMaster.dsMethod, param, function( response )
+    {
+      if(!HCG.chkResponse(response)) return;
+      search01();
+    });
+  }
+  ```
 
-## 팝업 기본 Markup
-### 앱을 분리하지 않는 팝업
-```html
-<v-dialog v-model="visible변수" scrollable >
-  <v-card>
-    <v-card-title>
-      <hgroup class="h-popup-header">
-        <h1>
-          <span><!-- 팝업타이틀 --></span>
-          <v-btn class="h-popup-close-btn">
-            <i class="icon-close" @click="v_popClose"></i>
-          </v-btn>
-        </h1>
-      </hgroup>
-    </v-card-title>
-      
-    <v-divider light class="m-0"></v-divider>
-    
-    <v-card-text>
-    
-      <!-- 코드 작성 -->
-
-    </v-card-text>
-      
-    <v-card-actions>
-      <v-btn flat class="h-button-positive1st" >선택</v-btn>
-      <v-btn flat class="h-button-negative1st" @click="v_popClose">닫기</v-btn>
-    </v-card-actions>
-  
-  </v-card>
-</v-dialog>
-```
-
+<hr>
 <br>
 
-### 앱(Vue instance)으로 분리되는 팝업
-프로그램의 복잡도를 낮추고 재사용을 수월하게 하기 위해 Vue 인스턴스를 분리하는 형태의 팝업은 다음과 같은 기본 MarkUp을 갖습니다
-이런 형태의 Vue 인스턴스는 페이지의 eventBus에 등록하여 다른 인스턴스에서 참조할 수 있도록 합니다. 
-
-```html
-<div id="<%=S_MODAL_NM%>">
-<v-app v-show="visible.popModal" class="position-absolute">
-<v-form id="f1" name="f1" ref="f1" method="post" v-model="valid">
-  <v-dialog v-model="visible.popModal" scrollable max-width="700">
-    <v-card> 
+## 팝업 기본 Markup
+### 앱(Vue instance)으로 분리되지 않는 팝업
+- 코드
+  ```html
+  <!-- 작성된 html 코드 내부에 끼워 넣기-->
+  <v-dialog v-model="visible변수" scrollable >
+    <v-card>
       <v-card-title>
         <hgroup class="h-popup-header">
           <h1>
-            <span><!-- 팝업 타이틀 --></span>
+            <span><!-- 팝업타이틀 --></span>
             <v-btn class="h-popup-close-btn">
-              <i class="icon-close" @click="visible.popModal=false"></i>
+              <i class="icon-close" @click="v_popClose"></i>
             </v-btn>
           </h1>
         </hgroup>
       </v-card-title>
+        
+      <v-divider light class="m-0"></v-divider>
       
-      <v-card-text class="h-popup-content">    
-      <!-- 코드 작성 -->
+      <v-card-text>
+      
+        <!-- 코드 작성 -->
+
       </v-card-text>
-      <v-card-actions class="text-center p-0">
-        <v-btn flat class="h-button-positive1st m-0"  @click="v_choice">{{v_getLabel('choice','선택')}}</v-btn>
-        <v-btn flat class="h-button-negative1st m-0"  @click="v_close" >{{v_getLabel('close','닫기')}}</v-btn>
+        
+      <v-card-actions>
+        <v-btn flat class="h-button-positive1st" >선택</v-btn>
+        <v-btn flat class="h-button-negative1st" @click="v_popClose">닫기</v-btn>
       </v-card-actions>
-      
+    
     </v-card>
   </v-dialog>
+  ```
 
-</v-form>
-</v-app>
+<br>
 
-</div>
+### 앱(Vue instance)으로 분리되는 팝업
+> Vue 인스턴스를 분리하는 형태의 팝업은 프로그램의 복잡도를 낮추고 재사용을 수월하게 하기 위함
+> - 아래와 같은 MarkUp의 Vue 인스턴스는 페이지의 eventBus에 등록하여 다른 인스턴스에서 참조
 
-```
+- 코드
+  ```jsp
+  <%@page import="common.util.PreparedMap"%>
+  <%@page import="hcg.hunel.core.util.StringUtil"%>
+  <%@page language="java" contentType="text/html; charset=utf-8"%>
+  <%@taglib uri="/WEB-INF/common.tld" prefix="com"%>
+  <%--
+  Program Name  : 파일이름.jsp
+  Description   : 프로그램명
+  Author        : 작성자
+  History       : yyyy-mm-dd 신규개발
+                  yyyy-mm-dd 수정
+  --%>
+  <%
+    String S_MODAL_NM = StringUtil.nvl(request.getParameter("S_MODAL_NM"),"popDetail");
+    PreparedMap hmPreparedData;
+    if(request.getAttribute("O_PRE_DATA")==null)
+    {
+      hmPreparedData = new PreparedMap();
+    }
+    else
+    {
+      hmPreparedData = (PreparedMap)request.getAttribute("O_PRE_DATA");
+    }
+  %>
+  <script>
+  $(document).ready(function(){
+    // 페이지 공통으로 사용하는 eventBus에 refs 형태로 팝업 등록
+    eventBus.$refs["<%=S_MODAL_NM%>"] = HCG.initVue({
+      el:"#" + "<%=S_MODAL_NM%>"
+      ,data:
+      {
+        dsClass : "<com:otp value="Biz클래스명"/>"
+        ,dsMethod : ""
+        ,condition : {}
+        ,resultSet : {}
+        ,formValue : 
+        {
+          title : ""
+          ,list : []
+        }
+        ,visible:
+        {
+          modal : false
+        }
+      }
+      ,methods :
+      {
+        v_close : function()
+        {
+          this.visible.modal = false 
+        }
+        ,v_show : function()
+        {
+          this.formValue.title = this.otherParam.title;
+          this.formValue.list = this.otherParam.list;
+          this.visible.modal = true;
+        }
+        ,v_select : function(item)
+        {
+          if(this.openerApp!=undefined && this.openerFunc!=undefined)
+          {
+            if(this.otherParam!=undefined)
+            {
+              this.openerFunc(item, this.otherParam);
+            }
+            else
+            {
+              this.openerFunc(item);
+            }
+          }
+          this.v_close();
+        }
+      }
+    });
+  });
+  </script>
+  <div id="<%=S_MODAL_NM%>">
+  <v-app v-show="visible.popModal" class="position-absolute">
+  <v-form id="f1" name="f1" ref="f1" method="post" v-model="valid">
+    <v-dialog v-model="visible.popModal" scrollable max-width="700">
+      <v-card> 
+        <v-card-title>
+          <hgroup class="h-popup-header">
+            <h1>
+              <span><!-- 팝업 타이틀 --></span>
+              <v-btn class="h-popup-close-btn">
+                <i class="icon-close" @click="visible.popModal=false"></i>
+              </v-btn>
+            </h1>
+          </hgroup>
+        </v-card-title>
+        
+        <v-card-text class="h-popup-content">    
+        <!-- 코드 작성 -->
+        </v-card-text>
+        <v-card-actions class="text-center p-0">
+          <v-btn flat class="h-button-positive1st m-0"  @click="v_choice">{{v_getLabel('choice','선택')}}</v-btn>
+          <v-btn flat class="h-button-negative1st m-0"  @click="v_close" >{{v_getLabel('close','닫기')}}</v-btn>
+        </v-card-actions>
+        
+      </v-card>
+    </v-dialog>
+
+  </v-form>
+  </v-app>
+
+  </div>
+  ```
+
+<hr>
+<br>
 
 # 상세 정보 모음
+
+<hr>
+<br>
