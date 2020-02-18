@@ -1,7 +1,7 @@
 # 목차
 
-- [목차](#%EB%AA%A9%EC%B0%A8)
-- [메소드](#%EB%A9%94%EC%86%8C%EB%93%9C)
+- [목차](#%eb%aa%a9%ec%b0%a8)
+- [메소드](#%eb%a9%94%ec%86%8c%eb%93%9c)
   - [JavaScript Function](#javascript-function)
   - [Java Method](#java-method)
   - [XML query name](#xml-query-name)
@@ -83,7 +83,7 @@
 
 <br>
 
-[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+[위로](#목차)
 
 <br>
 <hr>
@@ -95,7 +95,7 @@
 
 <br>
 
-[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+[위로](#목차)
 
 <br>
 <hr>
@@ -107,7 +107,7 @@
 
 <br>
 
-[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+[위로](#목차)
 
 <br>
 <hr>

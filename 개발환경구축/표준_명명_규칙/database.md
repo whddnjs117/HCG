@@ -29,7 +29,7 @@
 <br>
 <hr>
 
-# 명명 규칙
+# 명명 
 ## 모듈명
 | 약칭 | 관리           | 범위                                           |
 |:----:|----------------|------------------------------------------------|
@@ -53,7 +53,7 @@
 
 <br>
 
-[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+[위로](#목차)
 
 <br>
 
@@ -117,7 +117,7 @@
 
 <br>
 
-[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+[위로](#목차)
 
 <br>
 
@@ -158,7 +158,7 @@
 
 <br>
 
-[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+[위로](#목차)
 
 <br>
 
@@ -176,7 +176,7 @@
 
 <br>
 
-[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+[위로](#목차)
 
 <br>
 
@@ -198,7 +198,7 @@
 
 <br>
 
-[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+[위로](#목차)
 
 <br>
 
@@ -210,7 +210,7 @@
 
 <br>
 
-[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+[위로](#목차)
 
 <br>
 
@@ -228,7 +228,7 @@
 
 <br>
 
-[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+[위로](#목차)
 
 <br>
 
@@ -252,7 +252,7 @@
 
 <br>
 
-[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+[위로](#목차)
 
 <br>
 
@@ -263,7 +263,7 @@
 
 <br>
 
-[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+[위로](#목차)
 
 <br>
 
@@ -274,7 +274,7 @@
 
 <br>
 
-[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+[위로](#목차)
 
 <br>
 
@@ -285,7 +285,7 @@
 
 <br>
 
-[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+[위로](#목차)
 
 <br>
 
@@ -318,7 +318,7 @@
 
 <br>
 
-[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+[위로](#목차)
 
 <br>
 
@@ -399,7 +399,7 @@
 
 <br>
 
-[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+[위로](#목차)
 
 <br>
 
@@ -419,6 +419,6 @@
 
 <br>
 
-[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+[위로](#목차)
 
 <br>

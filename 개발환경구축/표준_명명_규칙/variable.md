@@ -25,7 +25,7 @@
 
 <br>
 
-[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+[위로](#목차)
 
 <br>
 <hr>
@@ -43,7 +43,7 @@
 
 <br>
 
-[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+[위로](#목차)
 
 <br>
 <hr>
@@ -77,7 +77,7 @@
     
 <br>
 
-[뒤로](https://github.com/InSeong-So/HCG_OJT) / [위로](#목차)
+[위로](#목차)
 
 <br>
 <hr>
